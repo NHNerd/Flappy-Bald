@@ -1,0 +1,155 @@
+@font-face {
+  font-family: 'AlfaSlabOne-Regular';
+  src: url('./public/AlfaSlabOne-Regular.ttf');
+}
+
+* {
+  font-family: 'AlfaSlabOne-Regular';
+}
+html {
+  background-image: url('./public/bodyBG/pixelBG_03.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+body:before {
+  content: ''; /* Создаем псевдоэлемент */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  ); /* Задаем виньетку */
+  pointer-events: none; /* Отключаем взаимодействие с элементом */
+  z-index: -1;
+}
+
+.game-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 720px;
+  width: 560px;
+  background-color: rgb(139, 207, 227);
+  border-radius: 15px;
+  border: 3px solid rgb(255, 255, 255);
+  overflow: hidden;
+}
+
+.bird {
+  margin: 25px;
+  position: absolute;
+  top: 40%;
+  height: 64px;
+  width: 64px;
+  transform: rotate(-30deg);
+  background-image: url('./public/flappy-bird-sprite-fly.png');
+  animation: fly 0.4s steps(3) infinite;
+  z-index: 1;
+}
+
+@keyframes fly {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 192px 0;
+  }
+}
+
+.pipes {
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+
+.pipes2 {
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+
+.pipeUp {
+  position: absolute;
+  top: 0;
+  width: 64px;
+  height: 200px; /* Установите нужную высоту */
+  background-color: green;
+  border: 3px solid rgb(0, 0, 0);
+}
+.pipeDown {
+  position: absolute;
+  bottom: 0;
+  width: 64px;
+  height: 200px; /* Установите нужную высоту */
+  background-color: green;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+.fps {
+  margin: auto;
+  padding: 10px;
+  width: 128px;
+  border: 3px solid rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.pause {
+  margin: 15px;
+  padding: 2px 10px;
+  position: absolute;
+  right: 0;
+  background-color: gold;
+  border-radius: 10px;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.score {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 35px 240px;
+  padding: 10px;
+  font-size: 52px;
+  font-weight: bold;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  z-index: 2;
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  display: none;
+}
+
+.restart {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 320px 180px;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 25px;
+  font-size: 38px;
+  background-color: gold;
+}
