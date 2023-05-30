@@ -1,7 +1,5 @@
 import { birdDOM, pipeUpDOM, pipeDownDOM, floorDOM, menuDOM } from './DOM.js';
 
-console.log(birdDOM.getBoundingClientRect().right - birdDOM.getBoundingClientRect().left);
-console.log(birdDOM.getBoundingClientRect().top - birdDOM.getBoundingClientRect().bottom);
 const collision = {
   value: false,
 
