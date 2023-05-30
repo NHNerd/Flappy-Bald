@@ -1,44 +1,53 @@
-const bird = document.querySelector('.bird');
-const pipeUpElements = document.querySelectorAll('.pipeUp');
-const pipeDownElements = document.querySelectorAll('.pipeDown');
-const menu = document.querySelector('.menu');
+import { birdDOM, pipeUpDOM, pipeDownDOM, floorDOM, menuDOM } from './DOM.js';
 
+console.log(birdDOM.getBoundingClientRect().right - birdDOM.getBoundingClientRect().left);
+console.log(birdDOM.getBoundingClientRect().top - birdDOM.getBoundingClientRect().bottom);
 const collision = {
   value: false,
 
   check() {
-    const birdRect = bird.getBoundingClientRect();
+    const birdRect = birdDOM.getBoundingClientRect();
+    const birdRectRight = birdRect.right - 22;
+    const birdRectLeft = birdRect.left + 20;
+    const birdRectBottom = birdRect.bottom - 50;
+    const birdRectTop = birdRect.top + 35;
 
-    pipeUpElements.forEach((pipeUpElement) => {
+    pipeUpDOM.forEach((pipeUpElement) => {
       const pipeUpRect = pipeUpElement.getBoundingClientRect();
       if (
-        birdRect.right > pipeUpRect.left &&
-        birdRect.left < pipeUpRect.right &&
-        birdRect.bottom > pipeUpRect.top &&
-        birdRect.top < pipeUpRect.bottom
+        birdRectRight > pipeUpRect.left &&
+        birdRectLeft < pipeUpRect.right &&
+        birdRectBottom > pipeUpRect.top &&
+        birdRectTop < pipeUpRect.bottom
       ) {
         console.log('Bird collided with pipeUp!');
         this.value = true;
       }
     });
 
-    pipeDownElements.forEach((pipeDownElement) => {
+    pipeDownDOM.forEach((pipeDownElement) => {
       const pipeDownRect = pipeDownElement.getBoundingClientRect();
       if (
-        birdRect.right > pipeDownRect.left &&
-        birdRect.left < pipeDownRect.right &&
-        birdRect.bottom > pipeDownRect.top &&
-        birdRect.top < pipeDownRect.bottom
+        birdRectRight > pipeDownRect.left &&
+        birdRectLeft < pipeDownRect.right &&
+        birdRectBottom > pipeDownRect.top &&
+        birdRectTop < pipeDownRect.bottom
       ) {
         this.value = true;
         console.log('Bird collided with pipeDown!');
       }
     });
 
+    const floorRect = floorDOM.getBoundingClientRect();
+    if (birdRectBottom > floorRect.top) {
+      this.value = true;
+      console.log('Bird collided with floor!');
+    }
+
     if (this.value) {
-      menu.style.display = 'block';
+      menuDOM.style.display = 'block';
     } else {
-      menu.style.display = 'none';
+      menuDOM.style.display = 'none';
     }
   },
   resetState() {

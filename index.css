@@ -30,6 +30,16 @@ body:before {
   z-index: -1;
 }
 
+.anime {
+  position: relative;
+  background-image: url('./public/bodyBG/Paw.gif');
+  left: 130px;
+  top: 550px;
+  width: 270px;
+  height: 480px;
+  transform: rotate(12deg);
+}
+
 .game-box {
   position: absolute;
   top: 50%;
@@ -46,13 +56,31 @@ body:before {
 .bird {
   margin: 25px;
   position: absolute;
-  top: 40%;
-  height: 64px;
-  width: 64px;
-  transform: rotate(-30deg);
-  background-image: url('./public/flappy-bird-sprite-fly.png');
-  animation: fly 0.4s steps(3) infinite;
-  z-index: 1;
+  top: 75%;
+  height: 128px;
+  width: 128px;
+  /* border: 3px solid rgb(0, 0, 0); */
+  transform: rotate(0deg);
+  background-image: url('./public/Sprite-all.png');
+  z-index: 2;
+}
+
+@keyframes dance {
+  0% {
+    background-position: 0 128px;
+  }
+  100% {
+    background-position: 1152px 128px;
+  }
+}
+
+@keyframes fly-dance {
+  0% {
+    background-position: 128px 256px;
+  }
+  100% {
+    background-position: 1280px 256px;
+  }
 }
 
 @keyframes fly {
@@ -60,7 +88,7 @@ body:before {
     background-position: 0 0;
   }
   100% {
-    background-position: 192px 0;
+    background-position: -768px 0;
   }
 }
 
@@ -80,7 +108,7 @@ body:before {
   position: absolute;
   top: 0;
   width: 64px;
-  height: 200px; /* Установите нужную высоту */
+  height: 200px;
   background-color: green;
   border: 3px solid rgb(0, 0, 0);
 }
@@ -88,13 +116,36 @@ body:before {
   position: absolute;
   bottom: 0;
   width: 64px;
-  height: 200px; /* Установите нужную высоту */
+  height: 200px;
   background-color: green;
   border: 3px solid rgb(0, 0, 0);
 }
 
-.fps {
+.tablet {
+  position: relative;
+  background-image: url('./public/tabletDeg.png');
+  bottom: -538px;
+  left: 700px;
+  width: 128px;
+  height: 148px;
+}
+
+.floor {
+  position: absolute;
+  background-image: url('./public/floor.jpeg');
+  bottom: 0;
   margin: auto;
+  width: 1120px;
+  height: 30px;
+  background-color: green;
+  border: 2px solid rgb(209, 209, 209);
+}
+
+.fps {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 10px;
   width: 128px;
   border: 3px solid rgb(255, 255, 255);
@@ -119,6 +170,7 @@ body:before {
   position: absolute;
   left: 0;
   right: 0;
+  margin: 35px 240px;
   margin: 35px 240px;
   padding: 10px;
   font-size: 52px;

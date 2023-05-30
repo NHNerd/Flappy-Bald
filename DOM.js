@@ -1,0 +1,12 @@
+export const birdDOM = document.querySelector('.bird');
+export const pipeUpDOM = document.querySelectorAll('.pipeUp');
+export const pipeDownDOM = document.querySelectorAll('.pipeDown');
+export const tabletDOM = document.querySelector('.tablet');
+export const floorDOM = document.querySelector('.floor');
+export const pipes1DOM = document.querySelector('.pipes');
+export const pipes2DOM = document.querySelector('.pipes2');
+export const menuDOM = document.querySelector('.menu');
+export const scoreDOM = document.querySelector('.score');
+export const pauseDOM = document.querySelector('.pause');
+export const restartDOM = document.querySelector('.restart');
+export const fpsDOM = document.querySelector('.fps');
