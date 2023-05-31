@@ -10,3 +10,4 @@ export const scoreDOM = document.querySelector('.score');
 export const pauseDOM = document.querySelector('.pause');
 export const restartDOM = document.querySelector('.restart');
 export const fpsDOM = document.querySelector('.fps');
+export const discoBallDOM = document.querySelector('.disco-ball');

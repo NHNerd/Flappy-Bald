@@ -2,18 +2,39 @@ import birdHandler from './bird.js';
 import fpsHandler from './fps.js';
 import pipeHandler from './pipes.js';
 import collision from './collision.js';
+import discoBall from './discoBall.js';
 
 import { pauseDOM, restartDOM } from './DOM.js';
 
 let animationId = undefined;
-let ispauseing = false;
+let ispausing = false;
+let performanceNow = 0;
+let performanceStartLock = true;
+let performanceStart;
+
+restartDOM.textContent = 'start';
 
 // handler loop
-
 function loop(timestamp) {
-  birdHandler.updatePosition(2, fpsHandler.fps);
-  pipeHandler.updatePosition(2.5, fpsHandler.fps);
-  collision.check();
+  //Time on start
+  if (performanceStartLock) {
+    performanceStart = performance.now();
+    performanceStartLock = false;
+  }
+  //Current time
+  performanceNow = performance.now() - performanceStart;
+
+  if (ispausing) {
+    collision.check();
+  }
+
+  if (discoBall.yPosDisco >= -410) {
+    discoBall.updatePosition();
+  }
+
+  birdHandler.updatePosition(440, fpsHandler.secondsPassed);
+  pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
+
   fpsHandler.updateFps(timestamp, 15); //? secont - frequency refresh
 
   animationId = requestAnimationFrame(loop);
@@ -25,23 +46,32 @@ function loop(timestamp) {
 
 // Start loop
 function startloop() {
-  if (!ispauseing) {
-    ispauseing = true;
+  if (!ispausing) {
+    ispausing = true;
     loop();
   }
 }
 // Stop loop
 
 function stopLoop() {
-  if (ispauseing) {
-    ispauseing = false;
+  if (ispausing) {
+    ispausing = false;
     cancelAnimationFrame(animationId);
   }
 }
 
 // Start/Stop on click
+document.addEventListener('keydown', function (event) {
+  if (event.code === 'Escape') {
+    if (ispausing) {
+      stopLoop();
+    } else {
+      startloop();
+    }
+  }
+});
 pauseDOM.addEventListener('click', () => {
-  if (ispauseing) {
+  if (ispausing) {
     stopLoop();
   } else {
     startloop();
@@ -49,6 +79,10 @@ pauseDOM.addEventListener('click', () => {
 });
 
 restartDOM.addEventListener('click', () => {
+  console.log('click RESTART');
+  performanceStartLock = true;
+  restartDOM.textContent = 'restart';
+
   collision.resetState();
   birdHandler.resetState();
   pipeHandler.resetState();

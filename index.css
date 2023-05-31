@@ -31,13 +31,26 @@ body:before {
 }
 
 .anime {
-  position: relative;
+  position: absolute;
   background-image: url('./public/bodyBG/Paw.gif');
-  left: 130px;
-  top: 550px;
+  top: 54%;
+  left: 5%;
+  transform: translate(-50%, -50%);
   width: 270px;
   height: 480px;
-  transform: rotate(12deg);
+  transform: rotate(7deg);
+}
+
+.disco-ball {
+  pointer-events: none;
+  position: absolute;
+  background-image: url('./public/discoBall.gif');
+  margin: 0 73px;
+  top: 0;
+  width: 400px;
+  height: 400px;
+  z-index: 3;
+  display: block;
 }
 
 .game-box {
@@ -61,7 +74,7 @@ body:before {
   width: 128px;
   /* border: 3px solid rgb(0, 0, 0); */
   transform: rotate(0deg);
-  background-image: url('./public/Sprite-all.png');
+  background-image: url('./public/Sprite-contur-all.png');
   z-index: 2;
 }
 
@@ -123,7 +136,7 @@ body:before {
 
 .tablet {
   position: relative;
-  background-image: url('./public/tabletDeg.png');
+  background-image: url('./public/tabletDeg-contur.png');
   bottom: -538px;
   left: 700px;
   width: 128px;
@@ -165,6 +178,9 @@ body:before {
   font-size: 18px;
   z-index: 2;
 }
+.pause:hover {
+  background-color: rgb(192, 180, 117);
+}
 
 .score {
   position: absolute;
@@ -188,20 +204,26 @@ body:before {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
-  display: none;
+  display: block;
 }
 
 .restart {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 320px 180px;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 30px;
   border: 5px solid rgb(0, 0, 0);
   border-radius: 25px;
   font-size: 38px;
-  background-color: gold;
+
+  background-image: radial-gradient(circle, rgb(43, 214, 244), rgb(225, 55, 140));
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.restart:hover {
+  opacity: 1;
 }

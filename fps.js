@@ -2,40 +2,45 @@ import { fpsDOM } from './DOM.js';
 
 fpsDOM.textContent = `FPS: 0`;
 const fpsHandler = {
-  fps: 16,
-  fpsSum: 0,
-  fpsAverage: 16,
-  pTimestamp: undefined,
+  pTimeStamp: 0,
+  secondsPassed: 0,
   i: 0,
+  fps: 60,
+  fpsSum: 0,
+  fpsAverage: 0,
 
-  updateFps(timestamp, frequency) {
+  updateFps(timeStamp, performanceNow, frequency) {
     this.frequency = frequency;
-    this.timestamp = timestamp;
+    this.performanceNow = performanceNow;
+    this.timeStamp = timeStamp;
 
-    if (this.i <= this.frequency && !isNaN(this.fps)) {
+    // speed sync
+    timeStamp = typeof timeStamp === 'number' ? timeStamp : performanceNow;
+    this.secondsPassed = (timeStamp - this.pTimeStamp) / 1000;
+    // this.secondsPassed = Math.min(this.secondsPassed, 0.09); //? secure
+    this.secondsPassed = Math.min(0.018, Math.abs(this.secondsPassed));
+
+    // FPS
+    this.fps = 1000 / (timeStamp - this.pTimeStamp);
+    if (this.i == frequency) {
+      this.fpsAverage = this.fpsSum / frequency;
+      this.fpsSum = 0;
+      this.i = 0;
+    } else {
       this.fpsSum = this.fpsSum + this.fps;
       this.i++;
     }
-    if (this.i == this.frequency) {
-      this.i = 0;
-      this.fpsAverage = this.fpsSum / this.frequency;
-      console.log(this.fpsAverage);
-      this.fpsSum = 0;
-    }
 
-    this.fps = timestamp - this.pTimestamp;
-    this.pTimestamp = timestamp;
+    this.pTimeStamp = timeStamp;
 
     this.setFpsCurent();
     return {
-      timestamp: this.timestamp,
-      pTimestamp: this.pTimestamp,
-      fps: this.timestamp,
+      secondsPassed: this.secondsPassed,
     };
   },
 
   setFpsCurent() {
-    fpsDOM.textContent = `FPS: ${Math.floor(1000 / this.fpsAverage)}`;
+    fpsDOM.textContent = `FPS: ${Math.floor(this.fpsAverage)}`;
   },
 };
 
