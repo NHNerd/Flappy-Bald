@@ -14,6 +14,8 @@ const fpsHandler = {
     this.performanceNow = performanceNow;
     this.timeStamp = timeStamp;
 
+    console.log(this.frequency);
+
     // speed sync
     timeStamp = typeof timeStamp === 'number' ? timeStamp : performanceNow;
     this.secondsPassed = (timeStamp - this.pTimeStamp) / 1000;

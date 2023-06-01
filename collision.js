@@ -15,7 +15,7 @@ const collision = {
     const birdRect = birdDOM.getBoundingClientRect();
     const birdRectRight = birdRect.right - 35;
     const birdRectLeft = birdRect.left + 80;
-    const birdRectBottom = birdRect.bottom - 55;
+    const birdRectBottom = birdRect.bottom - 59;
     const birdRectTop = birdRect.top + 39;
 
     pipeUpDOM.forEach((pipeUpElement) => {

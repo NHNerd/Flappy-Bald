@@ -12,6 +12,7 @@ html {
   background-position: center center;
   background-repeat: no-repeat;
   height: 100%;
+  overflow: hidden;
 }
 
 body:before {
@@ -41,6 +42,26 @@ body:before {
   transform: rotate(7deg);
 }
 
+.pepe {
+  position: absolute;
+  background-image: url('./public/bodyBG/pepe.gif');
+  top: 80%;
+  left: 85%;
+  transform: translate(-50%, -49%);
+  width: 640px;
+  height: 480px;
+}
+
+.instruction {
+  position: absolute;
+  top: 3vh;
+  right: 3vw;
+  font-size: 21px;
+  color: white;
+  opacity: 0.5;
+  animation: blinking-animation 2s infinite alternate;
+}
+
 .disco-ball {
   pointer-events: none;
   position: absolute;
@@ -60,7 +81,7 @@ body:before {
   transform: translate(-50%, -50%);
   height: 720px;
   width: 560px;
-  background-color: rgb(139, 207, 227);
+  background: linear-gradient(0deg, rgb(149, 219, 240), rgb(82, 122, 210));
   border-radius: 15px;
   border: 3px solid rgb(255, 255, 255);
   overflow: hidden;
@@ -152,13 +173,14 @@ body:before {
   height: 30px;
   background-color: green;
   border: 2px solid rgb(209, 209, 209);
+  border: 4px solid rgb(0, 0, 0);
 }
 
 .fps {
   position: absolute;
-  top: 7%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 3vh;
+  left: 3vw;
+
   padding: 10px;
   width: 128px;
   border: 3px solid rgb(255, 255, 255);
@@ -173,13 +195,13 @@ body:before {
   padding: 2px 10px;
   position: absolute;
   right: 0;
-  background-color: gold;
+  background-color: rgb(230, 230, 230);
   border-radius: 10px;
   font-size: 18px;
   z-index: 2;
 }
 .pause:hover {
-  background-color: rgb(192, 180, 117);
+  background-color: rgb(255, 255, 255);
 }
 
 .score {
@@ -204,7 +226,7 @@ body:before {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 2;
   display: block;
 }
@@ -215,15 +237,189 @@ body:before {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px 30px;
-  border: 5px solid rgb(0, 0, 0);
+  border: 4px solid rgb(180, 180, 180);
   border-radius: 25px;
   font-size: 38px;
-
-  background-image: radial-gradient(circle, rgb(43, 214, 244), rgb(225, 55, 140));
-  opacity: 0.8;
-  transition: 0.2s;
+  background-color: rgb(18, 18, 18);
+  color: rgb(237, 237, 237);
+  transition: 0.4s;
+  animation: blinking-animation 0.5s infinite alternate;
 }
 
 .restart:hover {
-  opacity: 1;
+  border: 4px solid rgb(40, 40, 40);
+  color: rgb(18, 18, 18);
+  background-color: rgb(237, 237, 237);
+}
+
+.air1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgb(149, 219, 240), rgb(82, 122, 210));
+  opacity: 0.2;
+  z-index: -1;
+}
+.air2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgb(149, 219, 240), rgb(82, 122, 210));
+  opacity: 0.2;
+  z-index: -3;
+}
+.air3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgb(149, 219, 240), rgb(82, 122, 210));
+  opacity: 0.4;
+  z-index: -5;
+}
+
+.treesBG1 {
+  position: absolute;
+  z-index: -2;
+}
+
+.treesBG1-tree1 {
+  position: absolute;
+  top: 135px;
+  height: 550px;
+  width: 500px;
+  background-image: url('./public/tree1-BG1.png');
+  background-size: 130%;
+  background-position: -80px -45px;
+  display: none;
+  /* border: 5px solid rgb(0, 0, 0); */
+}
+
+.treesBG1-tree2 {
+  position: absolute;
+  top: 134px;
+  height: 550px;
+  width: 550px;
+  background-image: url('./public/tree2-BG1.png');
+  background-size: 120%;
+  background-position: -30px 0px;
+  display: none;
+}
+
+.treesBG1-tree3 {
+  position: absolute;
+  top: 250px;
+  height: 440px;
+  width: 450px;
+  background-image: url('./public/tree3-BG1.png');
+  background-size: 103%;
+  background-position: 0 3px;
+  display: none;
+}
+
+.treesBG1-tree4 {
+  position: absolute;
+  top: 250px;
+  height: 440px;
+  width: 450px;
+  background-image: url('./public/tree4-BG1.png');
+  background-size: 103%;
+  background-position: 0 3px;
+  display: none;
+}
+
+.cloudsBG2 {
+  position: absolute;
+  opacity: 0.6;
+  z-index: -4;
+}
+.cloudBG1-cloud1 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: -6px 0px;
+}
+
+.cloudBG1-cloud2 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: -200px 0px;
+}
+
+.cloudBG1-cloud3 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: -2px -120px;
+}
+
+.cloudBG1-cloud4 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: -200px -120px;
+}
+
+.cloudBG1-cloud5 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: 0 -240px;
+}
+
+.cloudBG1-cloud6 {
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 110px;
+  width: 190px;
+  background-image: url('./public/clouds-pack.png');
+  background-size: 212%;
+  background-position: -200px -240px;
+}
+
+.mountain {
+  position: absolute;
+  background-image: url('./public/BG3-mountain.png');
+  bottom: 31px;
+  margin: auto;
+  width: 1200px;
+  height: 110px;
+  opacity: 0.6;
+  z-index: -6;
+}
+
+@keyframes blinking-animation {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }

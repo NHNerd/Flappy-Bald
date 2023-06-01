@@ -3,6 +3,7 @@ import fpsHandler from './fps.js';
 import pipeHandler from './pipes.js';
 import collision from './collision.js';
 import discoBall from './discoBall.js';
+import parallax from './parallax.js';
 
 import { pauseDOM, restartDOM } from './DOM.js';
 
@@ -32,10 +33,11 @@ function loop(timestamp) {
     discoBall.updatePosition();
   }
 
+  parallax.updatePosition(fpsHandler.secondsPassed);
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
   pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
 
-  fpsHandler.updateFps(timestamp, 15); //? secont - frequency refresh
+  fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
   animationId = requestAnimationFrame(loop);
 

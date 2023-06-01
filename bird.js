@@ -71,7 +71,7 @@ export default {
   setBirdPosition() {
     // ${this.speed * 3 - 5}
     birdDOM.style.transform = `translateY(${this.yPos}px) 
-    rotate(${this.speedCurrent + 5}deg)`;
+    rotate(${this.speedCurrent * 0.9 + 5}deg)`;
   },
 
   resetState() {
