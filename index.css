@@ -57,9 +57,12 @@ body:before {
   top: 3vh;
   right: 3vw;
   font-size: 21px;
-  color: white;
+  line-height: 2;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: rgba(255, 255, 255, 0.6);
   opacity: 0.5;
-  animation: blinking-animation 2s infinite alternate;
+  animation: blinking-animation 5s infinite alternate;
 }
 
 .disco-ball {
@@ -229,9 +232,11 @@ body:before {
 
   padding: 10px;
   width: 128px;
-  border: 3px solid rgb(255, 255, 255);
+  border: 3px solid rgb(255, 255, 255, 0.6);
   font-weight: bold;
-  color: rgb(255, 255, 255);
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   text-align: center;
 }

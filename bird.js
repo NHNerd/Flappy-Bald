@@ -1,6 +1,7 @@
 import { birdDOM } from './DOM.js';
 
 let jumpListener = false;
+let isSuperJump = false;
 
 // sprite animation
 birdDOM.style.animation = 'dance 0.85s steps(9) infinite';
@@ -20,6 +21,7 @@ document.addEventListener('mousedown', function (event) {
   ) {
     event.preventDefault(); //? off click on a button in focus
     jumpListener = true;
+    isSuperJump = false;
   }
 });
 
@@ -27,6 +29,15 @@ document.addEventListener('keydown', function (event) {
   if (event.code === 'Space') {
     event.preventDefault();
     jumpListener = true;
+    isSuperJump = false;
+  }
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.code === 'KeyX') {
+    event.preventDefault();
+    jumpListener = true;
+    isSuperJump = true;
   }
 });
 
@@ -50,6 +61,7 @@ export default {
   yPos: 0,
   speedCurrent: 0,
   beforeStart: 0,
+  superJump: 100,
 
   updatePosition(speed, secondsPassed) {
     this.secondsPassed = secondsPassed;
@@ -60,7 +72,9 @@ export default {
       this.beforeStart += 1;
       return;
     }
-
+    if (isSuperJump) {
+      this.superJump = 1.085;
+    }
     accelerationJumpFunc(secondsPassed); //? return: conclusionJump
 
     this.speedCurrent = (this.speed - conclusionJump) * secondsPassed;
@@ -70,13 +84,15 @@ export default {
 
     // refresh
     jumpListener = false;
+    this.superJump = 100;
     return { yPos: this.yPos, beforeStart: this.beforeStart };
   },
 
   setBirdPosition() {
     // ${this.speed * 3 - 5}
+
     birdDOM.style.transform = `translateY(${this.yPos}px) 
-    rotate(${this.speedCurrent * 0.9 + 5}deg)`;
+    rotate(${((this.speed - conclusionJump) / this.superJump) * 0.9 + 5}deg)`;
   },
 
   resetState() {

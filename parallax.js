@@ -61,7 +61,7 @@ export default {
 
     //BG1
     if (this.xBG1pose > this.gameBoxWidth) {
-      this.xBG1pose = -1 * Math.random(2) * 800 - this.gameBoxWidth;
+      this.xBG1pose = -1 * Math.random(2) * 1800 - this.gameBoxWidth;
       this.treeRandom = Math.floor(Math.random(3) * 3.9);
       this.tree1 = this.treeRandom === 0 ? 'block' : 'none';
       this.tree2 = this.treeRandom === 1 ? 'block' : 'none';
