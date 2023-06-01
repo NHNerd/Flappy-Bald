@@ -8,6 +8,8 @@ import {
   coffeeCountDOM,
 } from './DOM.js';
 
+import coffee from './coffee.js';
+
 const collision = {
   value: false,
   i: 0,
@@ -59,7 +61,8 @@ const collision = {
       birdRectBottom > coffeeDOMRect.top &&
       birdRectTop < coffeeDOMRect.bottom
     ) {
-      this.coffeeScore += 1;
+      coffee.coffeeScore += 1;
+      this.coffeeScore = coffee.coffeeScore;
       coffeeCountDOM.textContent = `x ${this.coffeeScore}`;
       coffeeDOM.style.display = 'none';
     }
@@ -73,8 +76,8 @@ const collision = {
   resetState() {
     this.value = false;
     this.i = 0;
-    this.coffeeScore = 0;
     coffeeCountDOM.textContent = `x 0`;
+    this.coffeeScore = 0;
   },
 };
 

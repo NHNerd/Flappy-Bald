@@ -136,17 +136,19 @@ export default {
   },
 
   resetState() {
-    gameBoxWidth = gameBox.offsetWidth;
+    this.gameBoxWidth = gameBox.offsetWidth;
     this.i = 0;
     this.xBG1pose = 0;
-
+    this.tree1 = 'none';
+    this.tree2 = 'none';
+    this.tree3 = 'none';
+    this.tree4 = 'none';
     this.xCloud1Pose = 600;
     this.xCloud2Pose = 600;
     this.xCloud3Pose = 600;
     this.xCloud4Pose = 600;
     this.xCloud5Pose = 600;
     this.xCloud6Pose = 600;
-
     this.setPipePosition();
   },
 };

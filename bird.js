@@ -14,7 +14,10 @@ document.addEventListener('mousedown', function (event) {
     x = false;
   }
 
-  if (!event.target.classList.contains('pause')) {
+  if (
+    !event.target.classList.contains('pause') &&
+    !event.target.classList.contains('coffee-button')
+  ) {
     event.preventDefault(); //? off click on a button in focus
     jumpListener = true;
   }
@@ -31,6 +34,8 @@ document.addEventListener('keydown', function (event) {
 let powerJump = 3;
 let conclusionJump = 0;
 let accelerationJump = 13; //? handler
+let isFirstJump = true;
+
 function accelerationJumpFunc(secondsPassed) {
   if (jumpListener) {
     powerJump = 3;
@@ -75,8 +80,9 @@ export default {
   },
 
   resetState() {
-    // birdDOM.style.animation = 'dance 0.85s steps(9) infinite';
     powerJump = 3;
+    accelerationJump = 13;
+    isFirstJump = true;
     this.yPos = 0;
     this.speedCurrent = 0;
     this.beforeStart = 0;

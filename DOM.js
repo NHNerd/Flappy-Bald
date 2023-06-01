@@ -4,6 +4,7 @@ export const pipeUpDOM = document.querySelectorAll('.pipeUp');
 export const pipeDownDOM = document.querySelectorAll('.pipeDown');
 export const coffeeDOM = document.querySelector('.coffee');
 export const coffeeCountDOM = document.querySelector('.coffeeCount');
+export const coffeeButtonDOM = document.querySelector('.coffee-button');
 export const tabletDOM = document.querySelector('.tablet');
 export const floorDOM = document.querySelector('.floor');
 export const pipes1DOM = document.querySelector('.pipes');

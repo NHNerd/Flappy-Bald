@@ -4,8 +4,9 @@ import pipeHandler from './pipes.js';
 import collision from './collision.js';
 import discoBall from './discoBall.js';
 import parallax from './parallax.js';
+import coffee from './coffee.js';
 
-import { pauseDOM, restartDOM } from './DOM.js';
+import { pauseDOM, restartDOM, coffeeButtonDOM } from './DOM.js';
 
 let animationId = undefined;
 let ispausing = false;
@@ -14,6 +15,7 @@ let performanceStartLock = true;
 let performanceStart;
 
 restartDOM.textContent = 'start';
+coffee.clickListner();
 
 // handler loop
 function loop(timestamp) {
@@ -36,6 +38,7 @@ function loop(timestamp) {
   parallax.updatePosition(fpsHandler.secondsPassed);
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
   pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
+  coffee.coffeeDisplay();
 
   fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
@@ -80,13 +83,22 @@ pauseDOM.addEventListener('click', () => {
   }
 });
 
+coffeeButtonDOM.addEventListener('click', () => {
+  if (ispausing) {
+    stopLoop();
+  } else {
+    startloop();
+  }
+});
+
 restartDOM.addEventListener('click', () => {
   console.log('click RESTART');
   performanceStartLock = true;
   restartDOM.textContent = 'restart';
-
   collision.resetState();
   birdHandler.resetState();
   pipeHandler.resetState();
+  parallax.resetState();
+  coffee.resetState();
   startloop();
 });
