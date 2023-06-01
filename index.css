@@ -70,6 +70,9 @@ body:before {
   top: 0;
   width: 400px;
   height: 400px;
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: 124px 0;
   z-index: 3;
   display: block;
 }
@@ -155,6 +158,33 @@ body:before {
   border: 3px solid rgb(0, 0, 0);
 }
 
+.coffee {
+  position: absolute;
+  right: -57px;
+  width: 40px;
+  height: 64px;
+  background-image: url('./public/coffee.png');
+  display: none;
+}
+
+.coffeeCount {
+  position: absolute;
+  top: 1.5vh;
+  left: 1vw;
+  padding: 20px;
+  height: 54px;
+  width: 128px;
+  font-size: 22px;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background-image: url('./public/coffee.png');
+  background-repeat: no-repeat;
+  background-size: 15%;
+  background-position: 30px 15px;
+}
 .tablet {
   position: relative;
   background-image: url('./public/tabletDeg-contur.png');
@@ -191,7 +221,7 @@ body:before {
 }
 
 .pause {
-  margin: 15px;
+  margin: 30px;
   padding: 2px 10px;
   position: absolute;
   right: 0;

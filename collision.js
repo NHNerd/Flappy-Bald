@@ -1,16 +1,19 @@
-import { birdDOM, pipeUpDOM, pipeDownDOM, floorDOM, menuDOM } from './DOM.js';
+import {
+  birdDOM,
+  pipeUpDOM,
+  pipeDownDOM,
+  floorDOM,
+  menuDOM,
+  coffeeDOM,
+  coffeeCountDOM,
+} from './DOM.js';
 
 const collision = {
   value: false,
   i: 0,
+  coffeeScore: 0,
 
   check() {
-    // waite before change animation
-    // if (this.i < 40) {
-    //   this.i += 1;
-    //   return;
-    // }
-
     // Bbox
     const birdRect = birdDOM.getBoundingClientRect();
     const birdRectRight = birdRect.right - 35;
@@ -49,6 +52,17 @@ const collision = {
       this.value = true;
       console.log('Bird collided with floor!');
     }
+    const coffeeDOMRect = coffeeDOM.getBoundingClientRect();
+    if (
+      birdRectRight > coffeeDOMRect.left &&
+      birdRectLeft < coffeeDOMRect.right &&
+      birdRectBottom > coffeeDOMRect.top &&
+      birdRectTop < coffeeDOMRect.bottom
+    ) {
+      this.coffeeScore += 1;
+      coffeeCountDOM.textContent = `x ${this.coffeeScore}`;
+      coffeeDOM.style.display = 'none';
+    }
 
     if (this.value) {
       menuDOM.style.display = 'block';
@@ -59,6 +73,8 @@ const collision = {
   resetState() {
     this.value = false;
     this.i = 0;
+    this.coffeeScore = 0;
+    coffeeCountDOM.textContent = `x 0`;
   },
 };
 

@@ -3,6 +3,7 @@ import {
   pipes2DOM,
   pipeUpDOM,
   pipeDownDOM,
+  coffeeDOM,
   tabletDOM,
   floorDOM,
   scoreDOM,
@@ -13,6 +14,8 @@ let pipeUpHeight1 = 0;
 let pipeDownHeight1 = 0;
 let pipeUpHeight2 = 0;
 let pipeDownHeight2 = 0;
+let pipeUpHeight;
+let CoffeeDisplayrandom = 1;
 
 function pipesRandomHigh1() {
   let random = Math.random(3) * 40;
@@ -23,6 +26,14 @@ function pipesRandomHigh1() {
   pipeUpDOM.forEach((pipeUpElement, index) => {
     if (index) {
       pipeUpElement.style.height = pipeUpHeight1;
+      //for coffee position
+      pipeUpHeight = pipeUpElement.offsetHeight;
+      CoffeeDisplayrandom = Math.random(pipeUpHeight) * 1.8;
+      if (CoffeeDisplayrandom >= 1) {
+        coffeeDOM.style.display = 'block';
+      } else {
+        coffeeDOM.style.display = 'none';
+      }
     }
   });
   pipeDownDOM.forEach((pipeDownElement, index) => {
@@ -49,6 +60,8 @@ function pipesRandomHigh2() {
     }
   });
 }
+
+pipesRandomHigh2.pipeUpHeight;
 pipesRandomHigh1();
 pipesRandomHigh2();
 
@@ -106,6 +119,7 @@ export default {
   setPipePosition() {
     pipes1DOM.style.transform = `translateX(${-this.xPos1}px)`;
     pipes2DOM.style.transform = `translateX(${-this.xPos2}px)`;
+    coffeeDOM.style.transform = `translate(${-this.xPos2}px, ${pipeUpHeight + 100}px)`;
     tabletDOM.style.transform = `translateX(${-this.tabletPos}px)`;
     floorDOM.style.transform = `translateX(${-this.floorPos}px)`;
     scoreDOM.textContent = this.score;
