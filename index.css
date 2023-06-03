@@ -1,3 +1,35 @@
+.mobile {
+  position: absolute;
+  top: 25vh;
+  bottom: 25vh;
+  left: 10vw;
+  right: 10vw;
+  border: 5px dashed rgba(255, 255, 255, 0.539);
+  border-radius: 30px;
+  display: none;
+}
+
+.text {
+  position: absolute;
+  top: 44%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  line-height: 1.5;
+  animation: blinking-animation 3s infinite alternate;
+}
+
+@media only screen and (max-width: 1200px) {
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
+
 @font-face {
   font-family: 'AlfaSlabOne-Regular';
   src: url('./public/AlfaSlabOne-Regular.ttf');
@@ -7,49 +39,12 @@
   font-family: 'AlfaSlabOne-Regular';
 }
 html {
-  background-image: url('./public/bodyBG/pixelBG_03.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background-color: rgb(16, 16, 16);
   height: 100%;
   overflow: hidden;
 }
-
-body:before {
-  content: ''; /* Создаем псевдоэлемент */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.6) 100%
-  ); /* Задаем виньетку */
-  pointer-events: none; /* Отключаем взаимодействие с элементом */
-  z-index: -1;
-}
-
-.anime {
-  position: absolute;
-  background-image: url('./public/bodyBG/Paw.gif');
-  top: 54%;
-  left: 5%;
-  transform: translate(-50%, -50%);
-  width: 270px;
-  height: 480px;
-  transform: rotate(7deg);
-}
-
-.pepe {
-  position: absolute;
-  background-image: url('./public/bodyBG/pepe.gif');
-  top: 80%;
-  left: 85%;
-  transform: translate(-50%, -49%);
-  width: 640px;
-  height: 480px;
+body {
+  user-select: none;
 }
 
 .instruction {
@@ -63,6 +58,22 @@ body:before {
   color: rgba(255, 255, 255, 0.6);
   opacity: 0.5;
   animation: blinking-animation 5s infinite alternate;
+}
+.link {
+  position: absolute;
+  bottom: 3vh;
+  left: 3vw;
+}
+
+.link-text {
+  color: white;
+  opacity: 0.6;
+}
+.link-inst {
+  opacity: 0.6;
+}
+.link-inst:hover {
+  opacity: 1;
 }
 
 .disco-ball {
@@ -101,34 +112,80 @@ body:before {
   width: 128px;
   /* border: 3px solid rgb(0, 0, 0); */
   transform: rotate(0deg);
-  background-image: url('./public/Sprite-contur-all.png');
+  background-image: url('./public/bird-srite-sheet.png');
   z-index: 0;
 }
 
 @keyframes dance {
   0% {
-    background-position: 0 128px;
+    background-position: 0 0px;
   }
   100% {
-    background-position: 1152px 128px;
+    background-position: 1152px 0px;
   }
 }
-
-@keyframes fly-dance {
+@keyframes dance-fly {
   0% {
-    background-position: 128px 256px;
+    background-position: 128px -128px;
   }
   100% {
-    background-position: 1280px 256px;
+    background-position: 1280px -128px;
   }
 }
-
 @keyframes fly {
   0% {
-    background-position: 0 0;
+    background-position: 0 -256px;
   }
   100% {
-    background-position: -768px 0;
+    background-position: -768px -256px;
+  }
+}
+@keyframes fly-coffee {
+  0% {
+    background-position: 1152px -384px;
+  }
+  100% {
+    background-position: 0 -384px;
+  }
+}
+@keyframes coffee-fly {
+  0% {
+    background-position: 128px -384px;
+  }
+  100% {
+    background-position: 1152px -384px;
+  }
+}
+@keyframes coffee-cigarette {
+  0% {
+    background-position: 0 -512px;
+  }
+  100% {
+    background-position: -640px -512px;
+  }
+}
+@keyframes relax {
+  0% {
+    background-position: 0 -640px;
+  }
+  100% {
+    background-position: 1152px -640px;
+  }
+}
+@keyframes coffee {
+  0% {
+    background-position: 0 -768px;
+  }
+  100% {
+    background-position: 1152px -768px;
+  }
+}
+@keyframes cigarette {
+  0% {
+    background-position: 0 -896px;
+  }
+  100% {
+    background-position: 1152px -896px;
   }
 }
 

@@ -6,6 +6,7 @@ import {
   menuDOM,
   coffeeDOM,
   coffeeCountDOM,
+  coffeeButtonDOM,
 } from './DOM.js';
 
 import coffee from './coffee.js';
@@ -50,7 +51,7 @@ const collision = {
     });
 
     const floorRect = floorDOM.getBoundingClientRect();
-    if (birdRectBottom > floorRect.top) {
+    if (birdRectBottom > floorRect.top - 14) {
       this.value = true;
       console.log('Bird collided with floor!');
     }

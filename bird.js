@@ -1,4 +1,4 @@
-import { birdDOM } from './DOM.js';
+import { birdDOM, restartDOM } from './DOM.js';
 
 let jumpListener = false;
 let isSuperJump = false;
@@ -6,15 +6,17 @@ let isSuperJump = false;
 // sprite animation
 birdDOM.style.animation = 'dance 0.85s steps(9) infinite';
 let x = true;
-document.addEventListener('mousedown', function (event) {
+restartDOM.addEventListener('click', () => {
   if (x) {
-    birdDOM.style.animation = 'fly-dance 0.8s steps(9) 1';
+    birdDOM.style.animation = 'dance-fly 0.8s steps(9) 1';
     setTimeout(() => {
       birdDOM.style.animation = 'fly 0.4s steps(6) infinite';
     }, 800);
     x = false;
   }
+});
 
+document.addEventListener('mousedown', function (event) {
   if (
     !event.target.classList.contains('pause') &&
     !event.target.classList.contains('coffee-button')

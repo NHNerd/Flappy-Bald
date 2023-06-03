@@ -16,6 +16,7 @@ let performanceStart;
 
 restartDOM.textContent = 'start';
 coffee.clickListner();
+coffee.animationListner();
 
 // handler loop
 function loop(timestamp) {
@@ -74,6 +75,26 @@ document.addEventListener('keydown', function (event) {
       startloop();
     }
   }
+  let x = 0;
+  if (coffeeButtonDOM.style.display === 'block') {
+    if (event.code === 'KeyC') {
+      if (ispausing) {
+        if (collision.coffeeScore > 0) {
+          stopLoop();
+          coffeeButtonDOM.style.display = 'none';
+          coffeeButtonDOM.textContent = 'resume';
+          x = 1;
+        }
+      } else {
+        if ((x = 1)) {
+          startloop();
+          coffeeButtonDOM.textContent = 'drink';
+          coffee.resetState();
+          x = 0;
+        }
+      }
+    }
+  }
 });
 pauseDOM.addEventListener('click', () => {
   if (ispausing) {
@@ -86,8 +107,12 @@ pauseDOM.addEventListener('click', () => {
 coffeeButtonDOM.addEventListener('click', () => {
   if (ispausing) {
     stopLoop();
+    coffeeButtonDOM.style.display = 'none';
+    coffeeButtonDOM.textContent = 'resume';
   } else {
     startloop();
+    coffeeButtonDOM.textContent = 'drink';
+    coffee.resetState();
   }
 });
 
