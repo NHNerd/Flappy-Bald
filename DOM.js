@@ -1,9 +1,11 @@
 export const gameBox = document.querySelector('.game-box');
 export const birdDOM = document.querySelector('.bird');
+export const speachDOM = document.querySelector('.speach');
 export const pipeUpDOM = document.querySelectorAll('.pipeUp');
 export const pipeDownDOM = document.querySelectorAll('.pipeDown');
 export const coffeeDOM = document.querySelector('.coffee');
 export const coffeeCountDOM = document.querySelector('.coffeeCount');
+export const coinsDOM = document.querySelector('.coins');
 export const coffeeButtonDOM = document.querySelector('.coffee-button');
 export const tabletDOM = document.querySelector('.tablet');
 export const floorDOM = document.querySelector('.floor');

@@ -5,6 +5,8 @@ import collision from './collision.js';
 import discoBall from './discoBall.js';
 import parallax from './parallax.js';
 import coffee from './coffee.js';
+import speach from './speach.js';
+import coins from './coins.js';
 
 import { pauseDOM, restartDOM, coffeeButtonDOM } from './DOM.js';
 
@@ -40,6 +42,8 @@ function loop(timestamp) {
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
   pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
   coffee.coffeeDisplay();
+  coins.coinsCounter();
+  speach.displayNone();
 
   fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
@@ -83,6 +87,7 @@ document.addEventListener('keydown', function (event) {
           stopLoop();
           coffeeButtonDOM.style.display = 'none';
           coffeeButtonDOM.textContent = 'resume';
+          coins.resetCoffeeScoreChange();
           x = 1;
         }
       } else {
@@ -109,6 +114,7 @@ coffeeButtonDOM.addEventListener('click', () => {
     stopLoop();
     coffeeButtonDOM.style.display = 'none';
     coffeeButtonDOM.textContent = 'resume';
+    coins.resetCoffeeScoreChange();
   } else {
     startloop();
     coffeeButtonDOM.textContent = 'drink';
@@ -117,7 +123,6 @@ coffeeButtonDOM.addEventListener('click', () => {
 });
 
 restartDOM.addEventListener('click', () => {
-  console.log('click RESTART');
   performanceStartLock = true;
   restartDOM.textContent = 'restart';
   collision.resetState();
@@ -125,5 +130,7 @@ restartDOM.addEventListener('click', () => {
   pipeHandler.resetState();
   parallax.resetState();
   coffee.resetState();
+  coins.resetState();
+  speach.resetState();
   startloop();
 });

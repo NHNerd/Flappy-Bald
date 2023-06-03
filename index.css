@@ -113,7 +113,7 @@ body {
   /* border: 3px solid rgb(0, 0, 0); */
   transform: rotate(0deg);
   background-image: url('./public/bird-srite-sheet.png');
-  z-index: 0;
+  z-index: 1;
 }
 
 @keyframes dance {
@@ -189,6 +189,29 @@ body {
   }
 }
 
+.speach {
+  position: absolute;
+  bottom: 96px;
+  left: 130px;
+  width: 180px;
+  height: 180px;
+  background-image: url('./public/speach.png');
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: 10px 0;
+  z-index: 1;
+  display: none;
+}
+.speach-text {
+  position: absolute;
+  top: 18%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .pipes {
   position: absolute;
   right: 0;
@@ -232,7 +255,7 @@ body {
 
 .coffeeCount {
   position: absolute;
-  top: 1.5vh;
+  top: 6.5vh;
   left: 1vw;
   padding: 20px;
   height: 54px;
@@ -249,8 +272,27 @@ body {
   background-position: 30px 15px;
 }
 
+.coins {
+  position: absolute;
+  top: 1.5vh;
+  left: 1.69vw;
+  padding: 20px;
+  height: 54px;
+  width: 128px;
+  font-size: 22px;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background-image: url('./public/coin.gif');
+  background-repeat: no-repeat;
+  background-size: 32%;
+  background-position: 2px 9px;
+}
+
 .coffee-button {
-  margin: 90px 43px;
+  margin: 130px 47px;
   padding: 2px 10px;
   position: absolute;
   left: 0;

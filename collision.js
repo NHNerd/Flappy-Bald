@@ -6,10 +6,10 @@ import {
   menuDOM,
   coffeeDOM,
   coffeeCountDOM,
-  coffeeButtonDOM,
 } from './DOM.js';
 
 import coffee from './coffee.js';
+import speach from './speach.js';
 
 const collision = {
   value: false,
@@ -70,6 +70,7 @@ const collision = {
 
     if (this.value) {
       menuDOM.style.display = 'block';
+      speach.displayBlock();
     } else {
       menuDOM.style.display = 'none';
     }
