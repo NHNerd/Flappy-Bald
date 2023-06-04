@@ -1,3 +1,5 @@
+import sound from './sound.js';
+
 import { birdDOM, restartDOM } from './DOM.js';
 
 let jumpListener = false;
@@ -24,6 +26,7 @@ document.addEventListener('mousedown', function (event) {
     event.preventDefault(); //? off click on a button in focus
     jumpListener = true;
     isSuperJump = false;
+    sound.playJumpSound();
   }
 });
 
@@ -32,11 +35,13 @@ document.addEventListener('keydown', function (event) {
     event.preventDefault();
     jumpListener = true;
     isSuperJump = false;
+    sound.playJumpSound();
   }
 });
 
 document.addEventListener('keydown', function (event) {
   if (event.code === 'KeyX') {
+    sound.playSuperJumpSound();
     event.preventDefault();
     jumpListener = true;
     isSuperJump = true;

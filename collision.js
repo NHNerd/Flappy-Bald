@@ -6,10 +6,12 @@ import {
   menuDOM,
   coffeeDOM,
   coffeeCountDOM,
+  pauseDOM,
 } from './DOM.js';
 
 import coffee from './coffee.js';
 import speach from './speach.js';
+import sound from './sound.js';
 
 const collision = {
   value: false,
@@ -66,11 +68,18 @@ const collision = {
       this.coffeeScore = coffee.coffeeScore;
       coffeeCountDOM.textContent = `x ${this.coffeeScore}`;
       coffeeDOM.style.display = 'none';
+      sound.playCoffeeSound();
     }
 
     if (this.value) {
-      menuDOM.style.display = 'block';
+      pauseDOM.style.display = 'none';
       speach.displayBlock();
+      sound.pauseBackMusic();
+      sound.playCollisionSound();
+      sound.isEndCollisionSound();
+      setTimeout(() => {
+        menuDOM.style.display = 'block';
+      }, 1200);
     } else {
       menuDOM.style.display = 'none';
     }

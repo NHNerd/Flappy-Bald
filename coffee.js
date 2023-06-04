@@ -2,6 +2,7 @@ import { coffeeButtonDOM, birdDOM, coffeeCountDOM } from './DOM.js';
 import bird from './bird.js';
 import collision from './collision.js';
 import fpsHandler from './fps.js';
+import sound from './sound.js';
 
 let animationId = undefined;
 
@@ -50,8 +51,8 @@ export default {
       }
       if (event.animationName === 'relax') {
         if (Math.random(2) * 2 > 1) {
+          sound.playCoffeeSound();
           birdDOM.style.animation = 'coffee 2.2s steps(9) 1';
-
           collision.coffeeScore -= 1;
           coffeeCountDOM.textContent = `x ${collision.coffeeScore}`;
         } else {
@@ -78,7 +79,6 @@ export default {
 
   // animation handler
   coffeeLoop() {
-    console.log(1);
     if (this.birdYPoseCurrent <= -5) {
       this.birdYPoseAdd += 200 * fpsHandler.secondsPassed;
     } else {

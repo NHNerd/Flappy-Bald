@@ -348,8 +348,40 @@ body {
   background-color: rgb(230, 230, 230);
   border-radius: 10px;
   font-size: 18px;
+  z-index: 3;
+  display: none;
+}
+
+.pause-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 98%;
+  width: 97.4%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 11px solid rgb(0, 0, 0);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 2;
 }
+.container {
+  font-size: 32px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+  color: white;
+  padding: 3%;
+}
+input {
+  height: 30px;
+  width: 30px;
+  accent-color: black;
+}
+
 .pause:hover {
   background-color: rgb(255, 255, 255);
 }

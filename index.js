@@ -7,18 +7,22 @@ import parallax from './parallax.js';
 import coffee from './coffee.js';
 import speach from './speach.js';
 import coins from './coins.js';
+import sound from './sound.js';
 
-import { pauseDOM, restartDOM, coffeeButtonDOM } from './DOM.js';
+import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM } from './DOM.js';
 
 let animationId = undefined;
 let ispausing = false;
 let performanceNow = 0;
 let performanceStartLock = true;
 let performanceStart;
+let gameStarted = false;
 
 restartDOM.textContent = 'start';
 coffee.clickListner();
 coffee.animationListner();
+sound.isMusicFunc();
+sound.isSoundFunc();
 
 // handler loop
 function loop(timestamp) {
@@ -29,6 +33,8 @@ function loop(timestamp) {
   }
   //Current time
   performanceNow = performance.now() - performanceStart;
+
+  gameStarted = true;
 
   if (ispausing) {
     collision.check();
@@ -50,6 +56,7 @@ function loop(timestamp) {
   animationId = requestAnimationFrame(loop);
 
   if (collision.value) {
+    gameStarted = false;
     stopLoop();
   }
 }
@@ -71,12 +78,17 @@ function stopLoop() {
 }
 
 // Start/Stop on click
+
 document.addEventListener('keydown', function (event) {
-  if (event.code === 'Escape') {
+  if (event.code === 'Escape' && gameStarted) {
     if (ispausing) {
       stopLoop();
+      pauseMenuDOM.style.display = 'flex';
+      pauseDOM.textContent = 'unpause';
     } else {
       startloop();
+      pauseMenuDOM.style.display = 'none';
+      pauseDOM.textContent = 'pause';
     }
   }
   let x = 0;
@@ -88,6 +100,7 @@ document.addEventListener('keydown', function (event) {
           coffeeButtonDOM.style.display = 'none';
           coffeeButtonDOM.textContent = 'resume';
           coins.resetCoffeeScoreChange();
+          sound.playDrinkSound();
           x = 1;
         }
       } else {
@@ -101,11 +114,16 @@ document.addEventListener('keydown', function (event) {
     }
   }
 });
+
 pauseDOM.addEventListener('click', () => {
   if (ispausing) {
     stopLoop();
+    pauseMenuDOM.style.display = 'flex';
+    pauseDOM.textContent = 'unpause';
   } else {
     startloop();
+    pauseMenuDOM.style.display = 'none';
+    pauseDOM.textContent = 'pause';
   }
 });
 
@@ -124,6 +142,7 @@ coffeeButtonDOM.addEventListener('click', () => {
 
 restartDOM.addEventListener('click', () => {
   performanceStartLock = true;
+  pauseDOM.style.display = 'block';
   restartDOM.textContent = 'restart';
   collision.resetState();
   birdHandler.resetState();
@@ -133,4 +152,5 @@ restartDOM.addEventListener('click', () => {
   coins.resetState();
   speach.resetState();
   startloop();
+  sound.playBackMusic();
 });
