@@ -154,3 +154,15 @@ restartDOM.addEventListener('click', () => {
   startloop();
   sound.playBackMusic();
 });
+
+//! Register serviceWorker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('service-worker.js')
+    .then(function (registration) {
+      console.log('Service Worker зарегистрирован успешно:', registration);
+    })
+    .catch(function (error) {
+      console.log('Ошибка регистрации Service Worker:', error);
+    });
+}

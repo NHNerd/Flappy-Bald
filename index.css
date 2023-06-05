@@ -21,7 +21,7 @@
   animation: blinking-animation 3s infinite alternate;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 100px) {
   .pc {
     display: none;
   }

@@ -1,0 +1,16 @@
+{
+  "name": "Flappy Bald",
+  "short_name": "flappy bald",
+  "description": "Flappy Bald is copy of the Flappy bird with another funny ыtory setting",
+  "icons": [
+    {
+      "src": "public/coffee-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}
