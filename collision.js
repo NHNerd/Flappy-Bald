@@ -37,7 +37,6 @@ const collision = {
         // console.log('Bird collided with pipeUp!');
         this.value = true;
       }
-      console.log(pipeUpRect.top);
     });
 
     pipeDownDOM.forEach((pipeDownElement) => {
