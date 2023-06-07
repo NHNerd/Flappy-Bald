@@ -84,6 +84,10 @@ export default {
     }
     accelerationJumpFunc(secondsPassed); //? return: conclusionJump
 
+    // limited height of fly
+    if (this.yPos < -800) {
+      this.yPos = -800;
+    }
     this.speedCurrent = (this.speed - conclusionJump) * secondsPassed;
     this.yPos += this.speedCurrent;
 

@@ -31,12 +31,13 @@ const collision = {
       if (
         birdRectRight > pipeUpRect.left &&
         birdRectLeft < pipeUpRect.right &&
-        birdRectBottom > pipeUpRect.top &&
+        birdRectBottom > -2000 &&
         birdRectTop < pipeUpRect.bottom
       ) {
-        console.log('Bird collided with pipeUp!');
+        // console.log('Bird collided with pipeUp!');
         this.value = true;
       }
+      console.log(pipeUpRect.top);
     });
 
     pipeDownDOM.forEach((pipeDownElement) => {
@@ -48,14 +49,14 @@ const collision = {
         birdRectTop < pipeDownRect.bottom
       ) {
         this.value = true;
-        console.log('Bird collided with pipeDown!');
+        // console.log('Bird collided with pipeDown!');
       }
     });
 
     const floorRect = floorDOM.getBoundingClientRect();
     if (birdRectBottom > floorRect.top - 14) {
       this.value = true;
-      console.log('Bird collided with floor!');
+      // console.log('Bird collided with floor!');
     }
     const coffeeDOMRect = coffeeDOM.getBoundingClientRect();
     if (

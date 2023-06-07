@@ -1,16 +1,24 @@
 {
   "name": "Flappy Bald",
-  "short_name": "flappy bald",
+  "short_name": "Flappy Bald",
   "description": "Flappy Bald is copy of the Flappy bird with another funny ыtory setting",
+  "start_url": "https://nhnerd.github.io/Flappy-Bald/",
+  "lang": "en",
+  "orientation": "portrait",
+  "display": "standalone",
+  "scope": "https://nhnerd.github.io/Flappy-Bald/",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
-      "src": "public/coffee-icon.png",
+      "src": "public/coffee-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "public/coffee-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ],
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000"
+  ]
 }
