@@ -111,10 +111,9 @@ body {
   top: 75%;
   height: 128px;
   width: 128px;
+  transform: translate3d(0, 0, 0);
   background-image: url('./public/bird-srite-sheet.png');
   z-index: 1;
-
-  will-change: transform;
 }
 
 @keyframes dance {
@@ -217,12 +216,14 @@ body {
   position: absolute;
   right: 0;
   height: 95%;
+  transform: translate3d(0, 0, 0);
 }
 
 .pipes2 {
   position: absolute;
   right: 0;
   height: 95%;
+  transform: translate3d(0, 0, 0);
 }
 
 .pipeUp {
@@ -252,6 +253,7 @@ body {
   height: 64px;
   background-image: url('./public/coffee.png');
   display: none;
+  will-change: transform;
 }
 
 .coffeeCount {
@@ -323,6 +325,7 @@ body {
   background-color: green;
   border: 2px solid rgb(209, 209, 209);
   border: 4px solid rgb(0, 0, 0);
+  will-change: transform;
 }
 
 .fps {

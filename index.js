@@ -52,7 +52,7 @@ function loop(timestamp) {
   coins.coinsCounter();
   speach.displayNone();
 
-  fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
+  fpsHandler.updateFps(timestamp, performanceNow, 35); //? secont - frequency refresh
 
   animationId = requestAnimationFrame(loop);
 
@@ -250,15 +250,15 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     throttle((event) => {
       if (event.key === ' ' || event.key === 'Spacebar') {
         spaceCb(event);
-      } else if (event.key === 'x' || event.key === 'X') {
+      } else if (event.key === 'x' || event.key === 'X' || event.code === 'KeyX') {
         xCb(event);
       } else if (event.key === 'Escape' && gameStarted && isDrinking === false) {
         escCb();
       }
 
       if (
-        (coffeeButtonDOM.style.display === 'block' && event.key === 'c') ||
-        event.key === 'C'
+        coffeeButtonDOM.style.display === 'block' &&
+        (event.key === 'c' || event.key === 'C' || event.code === 'KeyC')
       ) {
         coffeButtonCb();
       }

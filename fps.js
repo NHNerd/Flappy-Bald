@@ -21,27 +21,27 @@ const fpsHandler = {
     this.secondsPassed = Math.min(0.018, Math.abs(this.secondsPassed));
 
     // FPS
-    this.fps = 1000 / (timeStamp - this.pTimeStamp);
-    if (this.i == frequency) {
-      this.fpsAverage = this.fpsSum / frequency;
-      this.fpsSum = 0;
-      this.i = 0;
-    } else {
-      this.fpsSum = this.fpsSum + this.fps;
-      this.i++;
-    }
+    // this.fps = 1000 / (timeStamp - this.pTimeStamp);
+    // if (this.i == frequency) {
+    //   this.fpsAverage = this.fpsSum / frequency;
+    //   this.fpsSum = 0;
+    //   this.i = 0;
+    // } else {
+    //   this.fpsSum = this.fpsSum + this.fps;
+    //   this.i++;
+    // }
 
     this.pTimeStamp = timeStamp;
 
-    this.setFpsCurent();
+    // this.setFpsCurent();
     return {
       secondsPassed: this.secondsPassed,
     };
   },
 
-  setFpsCurent() {
-    fpsDOM.textContent = `FPS: ${Math.floor(this.fpsAverage)}`;
-  },
+  // setFpsCurent() {
+  //   fpsDOM.textContent = `FPS: ${Math.floor(this.fpsAverage)}`;
+  // },
 };
 
 export default fpsHandler;

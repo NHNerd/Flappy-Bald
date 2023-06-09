@@ -117,8 +117,8 @@ export default {
   },
 
   setPipePosition() {
-    pipes1DOM.style.transform = `translateX(${-this.xPos1}px)`;
-    pipes2DOM.style.transform = `translateX(${-this.xPos2}px)`;
+    pipes1DOM.style.transform = `translate3d(${-this.xPos1}px, 0, 0)`;
+    pipes2DOM.style.transform = `translate3d(${-this.xPos2}px, 0, 0)`;
     coffeeDOM.style.transform = `translate(${-this.xPos2}px, ${pipeUpHeight + 100}px)`;
     tabletDOM.style.transform = `translateX(${-this.tabletPos}px)`;
     floorDOM.style.transform = `translateX(${-this.floorPos}px)`;
