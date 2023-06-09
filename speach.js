@@ -8,14 +8,14 @@ export default {
   displayBlock() {
     this.display = 'block';
     speachDOM.style.display = this.display;
-    speachDOM.style.transform = `translateY(${bird.yPos}px)`;
+    speachDOM.style.transform = `translateY(${bird.yPos > -500 ? bird.yPos : -490}px)`;
   },
 
   displayNone() {
     if (this.i == 0) {
       this.display = 'none';
       speachDOM.style.display = this.display;
-      speachDOM.style.transform = `translateY(${bird.yPos}px)`;
+      speachDOM.style.transform = `translateY(${bird.yPos > -500 ? bird.yPos : -490}px)`;
       this.i += 1;
     }
   },

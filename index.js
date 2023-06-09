@@ -206,6 +206,7 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   );
 
   document.addEventListener('touchmove', (event) => {
+    //Mobile
     swipeCurrentYPos = event.changedTouches[0].pageY;
     if (swipeStartYPos > swipeCurrentYPos + 100 && !xCbCalled) {
       xCb(event);
@@ -245,6 +246,7 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     }
   });
 
+  //PC
   document.addEventListener(
     'keydown',
     throttle((event) => {
@@ -266,7 +268,9 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   );
 
   pauseDOM.addEventListener('click', () => {
-    pauseCb();
+    if (isDrinking === false) {
+      pauseCb();
+    }
   });
 
   coffeeButtonDOM.addEventListener('click', () => {

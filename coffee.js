@@ -50,16 +50,16 @@ export default {
         birdDOM.style.animation =
           collision.coffeeScore == 0
             ? 'coffee-fly 0.55s steps(8) 1'
-            : (birdDOM.style.animation = 'relax 1s steps(9) 1');
+            : (birdDOM.style.animation = 'relax 0.85s steps(9) 1');
       }
       if (event.animationName === 'relax') {
         if (Math.random(2) * 2 > 1) {
           sound.playCoffeeSound();
-          birdDOM.style.animation = 'coffee 2.2s steps(9) 1';
+          birdDOM.style.animation = 'coffee 1.9s steps(9) 1';
           collision.coffeeScore -= 1;
           coffeeCountDOM.textContent = `x ${collision.coffeeScore}`;
         } else {
-          birdDOM.style.animation = 'cigarette 2.2s steps(9) 1';
+          birdDOM.style.animation = 'cigarette 1.9s steps(9) 1';
         }
       }
       if (event.animationName === 'coffee-fly') {

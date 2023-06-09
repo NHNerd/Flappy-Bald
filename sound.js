@@ -87,3 +87,12 @@ gameOverSound.volume = 0.8;
 
 backSound.loop = true;
 backSound.volume = 0.2;
+
+// screen visible stop/start audio
+document.addEventListener('visibilitychange', function () {
+  if (document.visibilityState === 'hidden') {
+    backSound.pause();
+  } else {
+    backSound.play();
+  }
+});
