@@ -44,12 +44,12 @@ function loop(timestamp) {
     discoBall.updatePosition();
   }
 
-  // parallax.updatePosition(fpsHandler.secondsPassed);
+  parallax.updatePosition(fpsHandler.secondsPassed);
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
   pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
-  // coffee.coffeeDisplay();
-  // coins.coinsCounter();
-  // speach.displayNone();
+  coffee.coffeeDisplay();
+  coins.coinsCounter();
+  speach.displayNone();
 
   fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
@@ -76,51 +76,17 @@ function stopLoop() {
     cancelAnimationFrame(animationId);
   }
 }
-
-document.addEventListener('keydown', function (event) {
-  if (event.code === 'Space') {
-    event.preventDefault();
-    birdHandler.setJumpListener(true, false);
-    sound.playJumpSound();
-  } else if (event.code === 'KeyX') {
-    sound.playSuperJumpSound();
-    event.preventDefault();
-    birdHandler.setJumpListener(true, true);
-  } else if (event.code === 'Escape' && gameStarted) {
-    if (ispausing) {
-      stopLoop();
-      pauseMenuDOM.style.display = 'flex';
-      pauseDOM.textContent = 'unpause';
-    } else {
-      startloop();
-      pauseMenuDOM.style.display = 'none';
-      pauseDOM.textContent = 'pause';
-    }
-  }
-
-  let x = 0;
-  if (coffeeButtonDOM.style.display === 'block' && event.code === 'KeyC') {
-    if (ispausing) {
-      if (collision.coffeeScore > 0) {
-        stopLoop();
-        coffeeButtonDOM.style.display = 'none';
-        coffeeButtonDOM.textContent = 'resume';
-        coins.resetCoffeeScoreChange();
-        sound.playDrinkSound();
-        x = 1;
-      }
-    } else {
-      if ((x = 1)) {
-        startloop();
-        coffeeButtonDOM.textContent = 'drink';
-        coffee.resetState();
-        x = 0;
-      }
-    }
-  }
-});
-
-pauseDOM.addEventListener('click', () => {
+function spaceCb(event) {
+  event.preventDefault();
+  birdHandler.setJumpListener(true, false);
+  sound.playJumpSound();
+}
+function xCb(event) {
+  event.preventDefault();
+  birdHandler.setJumpListener(true, true);
+  sound.playSuperJumpSound();
+}
+function escCb() {
   if (ispausing) {
     stopLoop();
     pauseMenuDOM.style.display = 'flex';
@@ -130,22 +96,8 @@ pauseDOM.addEventListener('click', () => {
     pauseMenuDOM.style.display = 'none';
     pauseDOM.textContent = 'pause';
   }
-});
-
-coffeeButtonDOM.addEventListener('click', () => {
-  if (ispausing) {
-    stopLoop();
-    coffeeButtonDOM.style.display = 'none';
-    coffeeButtonDOM.textContent = 'resume';
-    coins.resetCoffeeScoreChange();
-  } else {
-    startloop();
-    coffeeButtonDOM.textContent = 'drink';
-    coffee.resetState();
-  }
-});
-
-restartDOM.addEventListener('click', () => {
+}
+function reset() {
   performanceStartLock = true;
   pauseDOM.style.display = 'block';
   restartDOM.textContent = 'restart';
@@ -158,7 +110,97 @@ restartDOM.addEventListener('click', () => {
   speach.resetState();
   startloop();
   sound.playBackMusic();
-});
+  performanceStartLock = true;
+  pauseDOM.style.display = 'block';
+  restartDOM.textContent = 'restart';
+  collision.resetState();
+  birdHandler.resetState();
+  pipeHandler.resetState();
+  parallax.resetState();
+  coffee.resetState();
+  coins.resetState();
+  speach.resetState();
+  startloop();
+  sound.playBackMusic();
+}
+function pauseCb() {
+  if (ispausing) {
+    stopLoop();
+    pauseMenuDOM.style.display = 'flex';
+    pauseDOM.textContent = 'unpause';
+  } else {
+    startloop();
+    pauseMenuDOM.style.display = 'none';
+    pauseDOM.textContent = 'pause';
+  }
+}
+
+if (window.matchMedia('(pointer: coarse)').matches) {
+  document.addEventListener('touchstart', function (event) {
+    spaceCb(event);
+  });
+  restartDOM.addEventListener('touchend', () => {
+    reset();
+  });
+  pauseDOM.addEventListener('touchend', () => {
+    pauseCb();
+  });
+} else {
+  document.addEventListener('keydown', function (event) {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      spaceCb(event);
+    } else if (event.key === 'x' || event.key === 'X') {
+      xCb(event);
+    } else if (event.key === 'Escape' && gameStarted) {
+      escCb();
+    }
+
+    let x = 0;
+    if (
+      (coffeeButtonDOM.style.display === 'block' && event.key === 'c') ||
+      event.key === 'C'
+    ) {
+      if (ispausing) {
+        if (collision.coffeeScore > 0) {
+          stopLoop();
+          coffeeButtonDOM.style.display = 'none';
+          coffeeButtonDOM.textContent = 'resume';
+          coins.resetCoffeeScoreChange();
+          sound.playDrinkSound();
+          x = 1;
+        }
+      } else {
+        if ((x = 1)) {
+          startloop();
+          coffeeButtonDOM.textContent = 'drink';
+          coffee.resetState();
+          x = 0;
+        }
+      }
+    }
+  });
+
+  pauseDOM.addEventListener('click', () => {
+    pauseCb();
+  });
+
+  coffeeButtonDOM.addEventListener('click', () => {
+    if (ispausing) {
+      stopLoop();
+      coffeeButtonDOM.style.display = 'none';
+      coffeeButtonDOM.textContent = 'resume';
+      coins.resetCoffeeScoreChange();
+    } else {
+      startloop();
+      coffeeButtonDOM.textContent = 'drink';
+      coffee.resetState();
+    }
+  });
+
+  restartDOM.addEventListener('click', () => {
+    reset();
+  });
+}
 
 //! Register serviceWorker
 if ('serviceWorker' in navigator) {
