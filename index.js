@@ -9,7 +9,7 @@ import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
 
-import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM } from './DOM.js';
+import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
 
 let animationId = undefined;
 let ispausing = false;
@@ -17,9 +17,10 @@ let performanceNow = 0;
 let performanceStartLock = true;
 let performanceStart;
 let gameStarted = false;
+let isDrinking = false;
 
 restartDOM.textContent = 'start';
-coffee.clickListner();
+// coffee.clickListner();
 coffee.animationListner();
 sound.isMusicFunc();
 sound.isSoundFunc();
@@ -76,7 +77,16 @@ function stopLoop() {
     cancelAnimationFrame(animationId);
   }
 }
-
+let x = true;
+function firstAnimationCb() {
+  if (x) {
+    birdDOM.style.animation = 'dance-fly 0.8s steps(9) 1';
+    setTimeout(() => {
+      birdDOM.style.animation = 'fly 0.4s steps(6) infinite';
+    }, 800);
+    x = false;
+  }
+}
 function spaceCb(event) {
   event.preventDefault();
   birdHandler.setJumpListener(true, false);
@@ -137,14 +147,22 @@ function pauseCb() {
 }
 function coffeButtonCb() {
   if (ispausing) {
-    stopLoop();
-    coffeeButtonDOM.style.display = 'none';
-    coffeeButtonDOM.textContent = 'resume';
-    coins.resetCoffeeScoreChange();
+    if (collision.coffeeScore > 0) {
+      stopLoop();
+      coffeeButtonDOM.style.display = 'none';
+      coffeeButtonDOM.textContent = 'resume';
+      coins.resetCoffeeScoreChange();
+      sound.playDrinkSound();
+      isDrinking = true;
+      coffee.startloop(); // Start another loop from coffee.js
+    }
   } else {
-    startloop();
-    coffeeButtonDOM.textContent = 'drink';
-    coffee.resetState();
+    if (isDrinking) {
+      startloop();
+      coffeeButtonDOM.textContent = 'drink';
+      coffee.resetState();
+      isDrinking = false;
+    }
   }
 }
 
@@ -167,15 +185,47 @@ function throttle(func, delay) {
 }
 
 if (window.matchMedia('(pointer: coarse)').matches) {
+  let swipeStartYPos = 0;
+  let swipeCurrentYPos = 0;
+  let xCbCalled = false;
+
   document.addEventListener(
     'touchstart',
     throttle((event) => {
-      spaceCb(event);
+      if (
+        !event.target.classList.contains('pause') &&
+        !event.target.classList.contains('coffee-button')
+      ) {
+        event.preventDefault(); //? off click on a button in focus
+        spaceCb(event);
+        swipeStartYPos = event.changedTouches[0].pageY;
+      }
     }),
-    90
+    100
   );
+
+  document.addEventListener('touchmove', (event) => {
+    swipeCurrentYPos = event.changedTouches[0].pageY;
+    if (swipeStartYPos > swipeCurrentYPos + 100 && !xCbCalled) {
+      xCb(event);
+      xCbCalled = true;
+    }
+    if (
+      swipeStartYPos < swipeCurrentYPos - 160 &&
+      !xCbCalled &&
+      coffeeButtonDOM.style.display === 'block'
+    ) {
+      coffeButtonCb();
+      xCbCalled = true;
+    }
+  });
+  document.addEventListener('touchend', (event) => {
+    xCbCalled = false;
+  });
+
   restartDOM.addEventListener('touchend', () => {
     reset();
+    firstAnimationCb();
   });
   pauseDOM.addEventListener('touchend', () => {
     pauseCb();
@@ -184,6 +234,16 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     coffeButtonCb();
   });
 } else {
+  document.addEventListener('mousedown', function (event) {
+    if (
+      !event.target.classList.contains('pause') &&
+      !event.target.classList.contains('coffee-button')
+    ) {
+      event.preventDefault(); //? off click on a button in focus
+      spaceCb(event);
+    }
+  });
+
   document.addEventListener(
     'keydown',
     throttle((event) => {
@@ -191,32 +251,15 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         spaceCb(event);
       } else if (event.key === 'x' || event.key === 'X') {
         xCb(event);
-      } else if (event.key === 'Escape' && gameStarted) {
+      } else if (event.key === 'Escape' && gameStarted && isDrinking === false) {
         escCb();
       }
 
-      let x = 0;
       if (
         (coffeeButtonDOM.style.display === 'block' && event.key === 'c') ||
         event.key === 'C'
       ) {
-        if (ispausing) {
-          if (collision.coffeeScore > 0) {
-            stopLoop();
-            coffeeButtonDOM.style.display = 'none';
-            coffeeButtonDOM.textContent = 'resume';
-            coins.resetCoffeeScoreChange();
-            sound.playDrinkSound();
-            x = 1;
-          }
-        } else {
-          if ((x = 1)) {
-            startloop();
-            coffeeButtonDOM.textContent = 'drink';
-            coffee.resetState();
-            x = 0;
-          }
-        }
+        coffeButtonCb();
       }
     }, 80)
   );
@@ -231,6 +274,7 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 
   restartDOM.addEventListener('click', () => {
     reset();
+    firstAnimationCb();
   });
 }
 

@@ -16,24 +16,27 @@ export default {
   changeAnimation: 0,
   coffeeIsOver: false,
 
-  clickListner() {
-    coffeeButtonDOM.addEventListener('click', () => {
-      if (!this.isCoffeeClick) {
-        this.startloop();
-        this.isCoffeeClick = true;
-      }
-    });
-    document.addEventListener('keydown', (event) => {
-      if (coffeeButtonDOM.style.display === 'block') {
-        if (event.code === 'KeyC') {
-          if (!this.isCoffeeClick) {
-            this.startloop();
-            this.isCoffeeClick = true;
-          }
-        }
-      }
-    });
-  },
+  // setCoffeButtonListner(isCoffeeClick) {
+  //   this.isCoffeeClick = isCoffeeClick;
+  // },
+  // clickListner() {
+  //   coffeeButtonDOM.addEventListener('click', () => {
+  //     if (!this.isCoffeeClick) {
+  //       this.startloop();
+  //       this.isCoffeeClick = true;
+  //     }
+  //   });
+  //   document.addEventListener('keydown', (event) => {
+  //     if (coffeeButtonDOM.style.display === 'block') {
+  //       if (event.code === 'KeyC') {
+  //         if (!this.isCoffeeClick) {
+  //           this.startloop();
+  //           this.isCoffeeClick = true;
+  //         }
+  //       }
+  //     }
+  //   });
+  // },
   animationListner() {
     birdDOM.addEventListener('animationend', (event) => {
       if (event.animationName === 'fly-coffee') {
@@ -79,6 +82,7 @@ export default {
 
   // animation handler
   coffeeLoop() {
+    console.log(`coffee loooooooop`);
     if (this.birdYPoseCurrent <= -5) {
       this.birdYPoseAdd += 200 * fpsHandler.secondsPassed;
     } else {
@@ -109,11 +113,6 @@ export default {
   startloop() {
     animationId = requestAnimationFrame(this.coffeeLoop.bind(this));
   },
-  // // Stop loop
-  // stopLoop() {
-  //   this.isCoffeeClick = false;
-  //   cancelAnimationFrame(animationId);
-  // },
 
   setBirdPosition() {
     birdDOM.style.transform = `translate3d(0, ${this.birdYPoseCurrent}px, 0)`;
