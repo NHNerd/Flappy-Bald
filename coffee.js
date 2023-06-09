@@ -82,7 +82,6 @@ export default {
 
   // animation handler
   coffeeLoop() {
-    console.log(`coffee loooooooop`);
     if (this.birdYPoseCurrent <= -5) {
       this.birdYPoseAdd += 200 * fpsHandler.secondsPassed;
     } else {

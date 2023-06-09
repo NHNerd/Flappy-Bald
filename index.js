@@ -37,29 +37,29 @@ function loop(timestamp) {
 
   gameStarted = true;
 
-  // if (ispausing) {
-  //   collision.check();
-  // }
+  if (ispausing) {
+    collision.check();
+  }
 
-  // if (discoBall.yPosDisco >= -410) {
-  //   discoBall.updatePosition();
-  // }
+  if (discoBall.yPosDisco >= -410) {
+    discoBall.updatePosition();
+  }
 
-  // parallax.updatePosition(fpsHandler.secondsPassed);
-  // birdHandler.updatePosition(440, fpsHandler.secondsPassed);
-  // pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
-  // coffee.coffeeDisplay();
-  // coins.coinsCounter();
-  // speach.displayNone();
+  parallax.updatePosition(fpsHandler.secondsPassed);
+  birdHandler.updatePosition(440, fpsHandler.secondsPassed);
+  pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
+  coffee.coffeeDisplay();
+  coins.coinsCounter();
+  speach.displayNone();
 
   fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
   animationId = requestAnimationFrame(loop);
 
-  // if (collision.value) {
-  //   gameStarted = false;
-  //   stopLoop();
-  // }
+  if (collision.value) {
+    gameStarted = false;
+    stopLoop();
+  }
 }
 
 // Start loop
@@ -194,6 +194,7 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     throttle((event) => {
       if (
         !event.target.classList.contains('pause') &&
+        !event.target.classList.contains('restart') &&
         !event.target.classList.contains('coffee-button')
       ) {
         event.preventDefault(); //? off click on a button in focus

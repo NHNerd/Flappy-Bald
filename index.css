@@ -37,12 +37,12 @@
 
 * {
   font-family: 'AlfaSlabOne-Regular';
-  touch-action: none;
 }
 html {
   background-color: rgb(16, 16, 16);
   height: 100%;
   overflow: hidden;
+  touch-action: none;
 }
 body {
   user-select: none;
