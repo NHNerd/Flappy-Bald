@@ -30,24 +30,6 @@ document.addEventListener('mousedown', function (event) {
   }
 });
 
-document.addEventListener('keydown', function (event) {
-  if (event.code === 'Space') {
-    event.preventDefault();
-    jumpListener = true;
-    isSuperJump = false;
-    sound.playJumpSound();
-  }
-});
-
-document.addEventListener('keydown', function (event) {
-  if (event.code === 'KeyX') {
-    sound.playSuperJumpSound();
-    event.preventDefault();
-    jumpListener = true;
-    isSuperJump = true;
-  }
-});
-
 // jump
 let powerJump = 3;
 let conclusionJump = 0;
@@ -69,6 +51,11 @@ export default {
   speedCurrent: 0,
   beforeStart: 0,
   superJump: 100,
+
+  setJumpListener(isJump, isSuper) {
+    jumpListener = isJump;
+    isSuperJump = isSuper;
+  },
 
   updatePosition(speed, secondsPassed) {
     this.secondsPassed = secondsPassed;
@@ -102,7 +89,7 @@ export default {
   setBirdPosition() {
     // ${this.speed * 3 - 5}
 
-    birdDOM.style.transform = `translateY(${this.yPos}px) 
+    birdDOM.style.transform = `translate3d(0, ${this.yPos}px, 0)
     rotate(${((this.speed - conclusionJump) / this.superJump) * 0.9 + 5}deg)`;
   },
 

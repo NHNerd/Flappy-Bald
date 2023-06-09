@@ -5,7 +5,7 @@
   "start_url": "https://nhnerd.github.io/Flappy-Bald/",
   "lang": "en",
   "orientation": "portrait",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "https://nhnerd.github.io/Flappy-Bald/",
   "background_color": "#ffffff",
   "theme_color": "#000000",

@@ -116,7 +116,7 @@ export default {
   // },
 
   setBirdPosition() {
-    birdDOM.style.transform = `translateY(${this.birdYPoseCurrent}px)`;
+    birdDOM.style.transform = `translate3d(0, ${this.birdYPoseCurrent}px, 0)`;
   },
   resetState() {
     this.isCoffeeClick = false;

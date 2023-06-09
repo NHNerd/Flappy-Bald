@@ -44,12 +44,12 @@ function loop(timestamp) {
     discoBall.updatePosition();
   }
 
-  parallax.updatePosition(fpsHandler.secondsPassed);
+  // parallax.updatePosition(fpsHandler.secondsPassed);
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
   pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
-  coffee.coffeeDisplay();
-  coins.coinsCounter();
-  speach.displayNone();
+  // coffee.coffeeDisplay();
+  // coins.coinsCounter();
+  // speach.displayNone();
 
   fpsHandler.updateFps(timestamp, performanceNow, 15); //? secont - frequency refresh
 
@@ -77,10 +77,16 @@ function stopLoop() {
   }
 }
 
-// Start/Stop on click
-
 document.addEventListener('keydown', function (event) {
-  if (event.code === 'Escape' && gameStarted) {
+  if (event.code === 'Space') {
+    event.preventDefault();
+    birdHandler.setJumpListener(true, false);
+    sound.playJumpSound();
+  } else if (event.code === 'KeyX') {
+    sound.playSuperJumpSound();
+    event.preventDefault();
+    birdHandler.setJumpListener(true, true);
+  } else if (event.code === 'Escape' && gameStarted) {
     if (ispausing) {
       stopLoop();
       pauseMenuDOM.style.display = 'flex';
@@ -91,25 +97,24 @@ document.addEventListener('keydown', function (event) {
       pauseDOM.textContent = 'pause';
     }
   }
+
   let x = 0;
-  if (coffeeButtonDOM.style.display === 'block') {
-    if (event.code === 'KeyC') {
-      if (ispausing) {
-        if (collision.coffeeScore > 0) {
-          stopLoop();
-          coffeeButtonDOM.style.display = 'none';
-          coffeeButtonDOM.textContent = 'resume';
-          coins.resetCoffeeScoreChange();
-          sound.playDrinkSound();
-          x = 1;
-        }
-      } else {
-        if ((x = 1)) {
-          startloop();
-          coffeeButtonDOM.textContent = 'drink';
-          coffee.resetState();
-          x = 0;
-        }
+  if (coffeeButtonDOM.style.display === 'block' && event.code === 'KeyC') {
+    if (ispausing) {
+      if (collision.coffeeScore > 0) {
+        stopLoop();
+        coffeeButtonDOM.style.display = 'none';
+        coffeeButtonDOM.textContent = 'resume';
+        coins.resetCoffeeScoreChange();
+        sound.playDrinkSound();
+        x = 1;
+      }
+    } else {
+      if ((x = 1)) {
+        startloop();
+        coffeeButtonDOM.textContent = 'drink';
+        coffee.resetState();
+        x = 0;
       }
     }
   }
