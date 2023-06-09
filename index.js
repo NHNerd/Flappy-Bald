@@ -76,6 +76,7 @@ function stopLoop() {
     cancelAnimationFrame(animationId);
   }
 }
+
 function spaceCb(event) {
   event.preventDefault();
   birdHandler.setJumpListener(true, false);
@@ -134,67 +135,98 @@ function pauseCb() {
     pauseDOM.textContent = 'pause';
   }
 }
+function coffeButtonCb() {
+  if (ispausing) {
+    stopLoop();
+    coffeeButtonDOM.style.display = 'none';
+    coffeeButtonDOM.textContent = 'resume';
+    coins.resetCoffeeScoreChange();
+  } else {
+    startloop();
+    coffeeButtonDOM.textContent = 'drink';
+    coffee.resetState();
+  }
+}
+
+function throttle(func, delay) {
+  let timerId;
+  let isThrottled = false;
+
+  return function (...args) {
+    if (isThrottled) {
+      return;
+    }
+
+    isThrottled = true;
+    func.apply(this, args);
+
+    timerId = setTimeout(() => {
+      isThrottled = false;
+    }, delay);
+  };
+}
 
 if (window.matchMedia('(pointer: coarse)').matches) {
-  document.addEventListener('touchstart', function (event) {
-    spaceCb(event);
-  });
+  document.addEventListener(
+    'touchstart',
+    throttle((event) => {
+      spaceCb(event);
+    }),
+    90
+  );
   restartDOM.addEventListener('touchend', () => {
     reset();
   });
   pauseDOM.addEventListener('touchend', () => {
     pauseCb();
   });
+  coffeeButtonDOM.addEventListener('touchstart', () => {
+    coffeButtonCb();
+  });
 } else {
-  document.addEventListener('keydown', function (event) {
-    if (event.key === ' ' || event.key === 'Spacebar') {
-      spaceCb(event);
-    } else if (event.key === 'x' || event.key === 'X') {
-      xCb(event);
-    } else if (event.key === 'Escape' && gameStarted) {
-      escCb();
-    }
+  document.addEventListener(
+    'keydown',
+    throttle((event) => {
+      if (event.key === ' ' || event.key === 'Spacebar') {
+        spaceCb(event);
+      } else if (event.key === 'x' || event.key === 'X') {
+        xCb(event);
+      } else if (event.key === 'Escape' && gameStarted) {
+        escCb();
+      }
 
-    let x = 0;
-    if (
-      (coffeeButtonDOM.style.display === 'block' && event.key === 'c') ||
-      event.key === 'C'
-    ) {
-      if (ispausing) {
-        if (collision.coffeeScore > 0) {
-          stopLoop();
-          coffeeButtonDOM.style.display = 'none';
-          coffeeButtonDOM.textContent = 'resume';
-          coins.resetCoffeeScoreChange();
-          sound.playDrinkSound();
-          x = 1;
-        }
-      } else {
-        if ((x = 1)) {
-          startloop();
-          coffeeButtonDOM.textContent = 'drink';
-          coffee.resetState();
-          x = 0;
+      let x = 0;
+      if (
+        (coffeeButtonDOM.style.display === 'block' && event.key === 'c') ||
+        event.key === 'C'
+      ) {
+        if (ispausing) {
+          if (collision.coffeeScore > 0) {
+            stopLoop();
+            coffeeButtonDOM.style.display = 'none';
+            coffeeButtonDOM.textContent = 'resume';
+            coins.resetCoffeeScoreChange();
+            sound.playDrinkSound();
+            x = 1;
+          }
+        } else {
+          if ((x = 1)) {
+            startloop();
+            coffeeButtonDOM.textContent = 'drink';
+            coffee.resetState();
+            x = 0;
+          }
         }
       }
-    }
-  });
+    }, 80)
+  );
 
   pauseDOM.addEventListener('click', () => {
     pauseCb();
   });
 
   coffeeButtonDOM.addEventListener('click', () => {
-    if (ispausing) {
-      stopLoop();
-      coffeeButtonDOM.style.display = 'none';
-      coffeeButtonDOM.textContent = 'resume';
-      coins.resetCoffeeScoreChange();
-    } else {
-      startloop();
-      coffeeButtonDOM.textContent = 'drink';
-      coffee.resetState();
-    }
+    coffeButtonCb();
   });
 
   restartDOM.addEventListener('click', () => {

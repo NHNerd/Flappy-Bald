@@ -35,7 +35,7 @@ export default {
     });
   },
   animationListner() {
-    birdDOM.addEventListener('animationend', () => {
+    birdDOM.addEventListener('animationend', (event) => {
       if (event.animationName === 'fly-coffee') {
         birdDOM.style.animation = 'coffee-cigarette 1s steps(5) 1';
       }
