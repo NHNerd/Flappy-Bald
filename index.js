@@ -3,6 +3,7 @@ import fpsHandler from './fps.js';
 import pipeHandler from './pipes.js';
 import collision from './collision.js';
 import discoBall from './discoBall.js';
+import snowFall from './snowFall.js';
 import parallax from './parallax.js';
 import coffee from './coffee.js';
 import speach from './speach.js';
@@ -18,6 +19,7 @@ let performanceStartLock = true;
 let performanceStart;
 let gameStarted = false;
 let isDrinking = false;
+let isCollisionPipe = true;
 
 restartDOM.textContent = 'start';
 // coffee.clickListner();
@@ -38,16 +40,17 @@ function loop(timestamp) {
   gameStarted = true;
 
   if (ispausing) {
-    collision.check();
+    collision.check(isCollisionPipe);
   }
 
   if (discoBall.yPosDisco >= -410) {
     discoBall.updatePosition();
   }
+  snowFall.updateOpacity();
 
   parallax.updatePosition(fpsHandler.secondsPassed);
   birdHandler.updatePosition(440, fpsHandler.secondsPassed);
-  pipeHandler.updatePosition(200, fpsHandler.secondsPassed);
+  pipeHandler.updatePosition(200, fpsHandler.secondsPassed, isCollisionPipe);
   coffee.coffeeDisplay();
   coins.coinsCounter();
   speach.displayNone();
@@ -87,6 +90,7 @@ function firstAnimationCb() {
     x = false;
   }
 }
+
 function spaceCb(event) {
   event.preventDefault();
   birdHandler.setJumpListener(true, false);
@@ -96,43 +100,6 @@ function xCb(event) {
   event.preventDefault();
   birdHandler.setJumpListener(true, true);
   sound.playSuperJumpSound();
-}
-function escCb() {
-  if (ispausing) {
-    stopLoop();
-    pauseMenuDOM.style.display = 'flex';
-    pauseDOM.textContent = 'unpause';
-  } else {
-    startloop();
-    pauseMenuDOM.style.display = 'none';
-    pauseDOM.textContent = 'pause';
-  }
-}
-function reset() {
-  performanceStartLock = true;
-  pauseDOM.style.display = 'block';
-  restartDOM.textContent = 'restart';
-  collision.resetState();
-  birdHandler.resetState();
-  pipeHandler.resetState();
-  parallax.resetState();
-  coffee.resetState();
-  coins.resetState();
-  speach.resetState();
-  startloop();
-  sound.playBackMusic();
-  performanceStartLock = true;
-  pauseDOM.style.display = 'block';
-  restartDOM.textContent = 'restart';
-  collision.resetState();
-  birdHandler.resetState();
-  pipeHandler.resetState();
-  parallax.resetState();
-  coffee.resetState();
-  coins.resetState();
-  speach.resetState();
-  startloop();
-  sound.playBackMusic();
 }
 function pauseCb() {
   if (ispausing) {
@@ -164,6 +131,22 @@ function coffeButtonCb() {
       isDrinking = false;
     }
   }
+}
+
+function reset() {
+  performanceStartLock = true;
+  pauseDOM.style.display = 'block';
+  restartDOM.textContent = 'restart';
+  collision.resetState();
+  birdHandler.resetState();
+  pipeHandler.resetState();
+  parallax.resetState();
+  coffee.resetState();
+  coins.resetState();
+  speach.resetState();
+  snowFall.resetState();
+  startloop();
+  sound.playBackMusic();
 }
 
 function throttle(func, delay) {
@@ -205,8 +188,8 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     100
   );
 
+  //Mobile
   document.addEventListener('touchmove', (event) => {
-    //Mobile
     swipeCurrentYPos = event.changedTouches[0].pageY;
     if (swipeStartYPos > swipeCurrentYPos + 100 && !xCbCalled) {
       xCb(event);
@@ -219,9 +202,14 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     ) {
       coffeButtonCb();
       xCbCalled = true;
+
+      isCollisionPipe = false;
+      setTimeout(() => {
+        isCollisionPipe = true;
+      }, 1650);
     }
   });
-  document.addEventListener('touchend', (event) => {
+  document.addEventListener('touchend', () => {
     xCbCalled = false;
   });
 
@@ -230,17 +218,21 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     firstAnimationCb();
   });
   pauseDOM.addEventListener('touchend', () => {
-    pauseCb();
+    if (isDrinking === false) {
+      pauseCb();
+    }
   });
   coffeeButtonDOM.addEventListener('touchstart', () => {
     coffeButtonCb();
+    // Off collision per 3 second
+    isCollisionPipe = false;
+    setTimeout(() => {
+      isCollisionPipe = true;
+    }, 1650);
   });
 } else {
   document.addEventListener('mousedown', function (event) {
-    if (
-      !event.target.classList.contains('pause') &&
-      !event.target.classList.contains('coffee-button')
-    ) {
+    if (!event.target.classList.contains('pause') && !event.target.classList.contains('coffee-button')) {
       event.preventDefault(); //? off click on a button in focus
       spaceCb(event);
     }
@@ -250,12 +242,20 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   document.addEventListener(
     'keydown',
     throttle((event) => {
+      if ((event.key === 'NumpadEnter' || event.key === 'Enter') && !gameStarted) {
+        reset();
+        firstAnimationCb();
+      }
       if (event.key === ' ' || event.key === 'Spacebar') {
         spaceCb(event);
+        if (!gameStarted) {
+          reset();
+          firstAnimationCb();
+        }
       } else if (event.key === 'x' || event.key === 'X' || event.code === 'KeyX') {
         xCb(event);
       } else if (event.key === 'Escape' && gameStarted && isDrinking === false) {
-        escCb();
+        pauseCb();
       }
 
       if (
@@ -263,6 +263,11 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         (event.key === 'c' || event.key === 'C' || event.code === 'KeyC')
       ) {
         coffeButtonCb();
+        // Off collision per 3 second
+        isCollisionPipe = false;
+        setTimeout(() => {
+          isCollisionPipe = true;
+        }, 1450);
       }
     }, 80)
   );

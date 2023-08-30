@@ -74,8 +74,15 @@ export default {
   floorPos: 0,
   score: 0,
   i: 0,
+  opacity: 1,
 
-  updatePosition(speed, secondsPassed) {
+  updatePosition(speed, secondsPassed, isCollisionPipe) {
+    if (isCollisionPipe) {
+      this.opacity = 1;
+    } else {
+      this.opacity = 0.3;
+    }
+
     // waite before change animation
     if (this.i < 20) {
       this.i += 90 * secondsPassed;
@@ -119,6 +126,8 @@ export default {
   setPipePosition() {
     pipes1DOM.style.transform = `translate3d(${-this.xPos1}px, 0, 0)`;
     pipes2DOM.style.transform = `translate3d(${-this.xPos2}px, 0, 0)`;
+    pipes1DOM.style.opacity = this.opacity; // Установите прозрачность для pipes1DOM
+    pipes2DOM.style.opacity = this.opacity;
     coffeeDOM.style.transform = `translate(${-this.xPos2}px, ${pipeUpHeight + 100}px)`;
     tabletDOM.style.transform = `translateX(${-this.tabletPos}px)`;
     floorDOM.style.transform = `translateX(${-this.floorPos}px)`;

@@ -16,27 +16,6 @@ export default {
   changeAnimation: 0,
   coffeeIsOver: false,
 
-  // setCoffeButtonListner(isCoffeeClick) {
-  //   this.isCoffeeClick = isCoffeeClick;
-  // },
-  // clickListner() {
-  //   coffeeButtonDOM.addEventListener('click', () => {
-  //     if (!this.isCoffeeClick) {
-  //       this.startloop();
-  //       this.isCoffeeClick = true;
-  //     }
-  //   });
-  //   document.addEventListener('keydown', (event) => {
-  //     if (coffeeButtonDOM.style.display === 'block') {
-  //       if (event.code === 'KeyC') {
-  //         if (!this.isCoffeeClick) {
-  //           this.startloop();
-  //           this.isCoffeeClick = true;
-  //         }
-  //       }
-  //     }
-  //   });
-  // },
   animationListner() {
     birdDOM.addEventListener('animationend', (event) => {
       if (event.animationName === 'fly-coffee') {

@@ -91,7 +91,16 @@ body {
   z-index: 3;
   display: block;
 }
-
+.snow-fall {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url('./public/snowFall.gif');
+  opacity: 0;
+  transition: 9s ease-in-out;
+}
 .game-box {
   position: absolute;
   top: 50%;
