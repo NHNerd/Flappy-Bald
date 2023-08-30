@@ -20,6 +20,7 @@ export const soundCheckBoxDOM = document.querySelector('.sound-check-box');
 export const restartDOM = document.querySelector('.restart');
 export const fpsDOM = document.querySelector('.fps');
 export const discoBallDOM = document.querySelector('.disco-ball');
+export const snowFallDOM = document.querySelector('.snow-fall');
 export const treesBG1DOM = document.querySelector('.treesBG1');
 export const BG1Tree1DOM = document.querySelector('.treesBG1-tree1');
 export const BG1Tree2DOM = document.querySelector('.treesBG1-tree2');

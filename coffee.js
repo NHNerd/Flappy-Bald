@@ -16,26 +16,8 @@ export default {
   changeAnimation: 0,
   coffeeIsOver: false,
 
-  clickListner() {
-    coffeeButtonDOM.addEventListener('click', () => {
-      if (!this.isCoffeeClick) {
-        this.startloop();
-        this.isCoffeeClick = true;
-      }
-    });
-    document.addEventListener('keydown', (event) => {
-      if (coffeeButtonDOM.style.display === 'block') {
-        if (event.code === 'KeyC') {
-          if (!this.isCoffeeClick) {
-            this.startloop();
-            this.isCoffeeClick = true;
-          }
-        }
-      }
-    });
-  },
   animationListner() {
-    birdDOM.addEventListener('animationend', () => {
+    birdDOM.addEventListener('animationend', (event) => {
       if (event.animationName === 'fly-coffee') {
         birdDOM.style.animation = 'coffee-cigarette 1s steps(5) 1';
       }
@@ -47,16 +29,16 @@ export default {
         birdDOM.style.animation =
           collision.coffeeScore == 0
             ? 'coffee-fly 0.55s steps(8) 1'
-            : (birdDOM.style.animation = 'relax 1s steps(9) 1');
+            : (birdDOM.style.animation = 'relax 0.85s steps(9) 1');
       }
       if (event.animationName === 'relax') {
         if (Math.random(2) * 2 > 1) {
           sound.playCoffeeSound();
-          birdDOM.style.animation = 'coffee 2.2s steps(9) 1';
+          birdDOM.style.animation = 'coffee 1.9s steps(9) 1';
           collision.coffeeScore -= 1;
           coffeeCountDOM.textContent = `x ${collision.coffeeScore}`;
         } else {
-          birdDOM.style.animation = 'cigarette 2.2s steps(9) 1';
+          birdDOM.style.animation = 'cigarette 1.9s steps(9) 1';
         }
       }
       if (event.animationName === 'coffee-fly') {
@@ -109,14 +91,9 @@ export default {
   startloop() {
     animationId = requestAnimationFrame(this.coffeeLoop.bind(this));
   },
-  // // Stop loop
-  // stopLoop() {
-  //   this.isCoffeeClick = false;
-  //   cancelAnimationFrame(animationId);
-  // },
 
   setBirdPosition() {
-    birdDOM.style.transform = `translateY(${this.birdYPoseCurrent}px)`;
+    birdDOM.style.transform = `translate3d(0, ${this.birdYPoseCurrent}px, 0)`;
   },
   resetState() {
     this.isCoffeeClick = false;

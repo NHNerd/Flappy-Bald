@@ -2,8 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="manifest" href="manifest.json" />
+    <script src="service-worker.js"></script>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script>
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('service-worker.js');
+      }
+    </script>
     <title>Flappy Bald</title>
     <link rel="icon" href="./public/coffee.ico" type="image/x-icon" />
 
@@ -11,10 +20,7 @@
   </head>
   <body>
     <div class="mobile">
-      <div class="text">
-        Mobile version is not ready yet<br />
-        Try game on PC
-      </div>
+      <div class="text">Your window is too small</div>
     </div>
 
     <div class="pc">
@@ -38,8 +44,6 @@
           Please contact me :)
         </p>
       </div>
-
-      <div class="fps"></div>
       <div class="game-box">
         <div class="air1"></div>
         <div class="air2"></div>
@@ -60,6 +64,7 @@
         </div>
         <div class="mountain"></div>
         <div class="disco-ball"></div>
+        <div class="snow-fall"></div>
         <button type="button" class="pause">pause</button>
         <div class="pause-menu">
           <label class="container"
@@ -73,7 +78,6 @@
             <span class="checkmark"></span>
           </label>
         </div>
-
         <div class="menu">
           <button type="button" class="restart">restart</button>
         </div>
@@ -101,7 +105,6 @@
         <div class="floor"></div>
       </div>
     </div>
-
     <script type="module" src="index.js"></script>
   </body>
 </html>

@@ -11,7 +11,7 @@ export default {
       return;
     }
 
-    this.yPosDisco -= 10;
+    this.yPosDisco -= 5;
     if (this.yPosDisco < -400) {
       discoBallDOM.style.display = 'none';
     }
