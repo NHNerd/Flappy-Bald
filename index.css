@@ -263,6 +263,8 @@ body {
   background-image: url('./public/coffee.png');
   display: none;
   will-change: transform;
+
+  animation: coffee-blick 0.5s infinite alternate;
 }
 
 .coffeeCount {
@@ -600,6 +602,15 @@ input {
 @keyframes blinking-animation {
   0% {
     opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes coffee-blick {
+  0% {
+    opacity: 0.8;
   }
   100% {
     opacity: 1;

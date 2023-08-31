@@ -280,6 +280,10 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 
   coffeeButtonDOM.addEventListener('click', () => {
     coffeButtonCb();
+    isCollisionPipe = false;
+    setTimeout(() => {
+      isCollisionPipe = true;
+    }, 1450);
   });
 
   restartDOM.addEventListener('click', () => {
