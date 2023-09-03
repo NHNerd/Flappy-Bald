@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'AlfaSlabOne-Regular';
-  src: url('./public/AlfaSlabOne-Regular.ttf');
+  src: url('./public/font/AlfaSlabOne-Regular.ttf');
 }
 
 * {
@@ -80,7 +80,7 @@ body {
 .disco-ball {
   pointer-events: none;
   position: absolute;
-  background-image: url('./public/discoBall.gif');
+  background-image: url('./public/img/discoBall.gif');
   margin: 0 73px;
   top: 0;
   width: 400px;
@@ -97,7 +97,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('./public/snowFall.gif');
+  background-image: url('./public/img/snowFall.gif');
   opacity: 0;
   transition: 9s ease-in-out;
 }
@@ -121,7 +121,7 @@ body {
   height: 128px;
   width: 128px;
   transform: translate3d(0, 0, 0);
-  background-image: url('./public/bird-srite-sheet.png');
+  background-image: url('./public/img/bird-srite-sheet.png');
   z-index: 1;
 }
 
@@ -204,7 +204,7 @@ body {
   left: 130px;
   width: 180px;
   height: 180px;
-  background-image: url('./public/speach.png');
+  background-image: url('./public/img/speach.png');
   background-repeat: no-repeat;
   background-size: 90%;
   background-position: 10px 0;
@@ -240,7 +240,7 @@ body {
   top: 0;
   width: 64px;
   height: 200px;
-  background-image: url('./public/sigarette-filter.png'), url('./public/sigarette.png');
+  background-image: url('./public/img/sigarette-filter.png'), url('./public/img/sigarette.png');
   transform: rotate(180deg);
   background-repeat: no-repeat;
   background-position: bottom, top;
@@ -250,7 +250,7 @@ body {
   bottom: 0;
   width: 64px;
   height: 200px;
-  background-image: url('./public/sigarette-filter.png'), url('./public/sigarette.png');
+  background-image: url('./public/img/sigarette-filter.png'), url('./public/img/sigarette.png');
   background-repeat: no-repeat, no-repeat;
   background-position: bottom, top;
 }
@@ -260,7 +260,7 @@ body {
   right: -57px;
   width: 40px;
   height: 64px;
-  background-image: url('./public/coffee.png');
+  background-image: url('./public/img/coffee.png');
   display: none;
   will-change: transform;
 
@@ -280,7 +280,7 @@ body {
   -webkit-text-stroke-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   text-align: center;
-  background-image: url('./public/coffee.png');
+  background-image: url('./public/img/coffee.png');
   background-repeat: no-repeat;
   background-size: 15%;
   background-position: 30px 15px;
@@ -299,7 +299,7 @@ body {
   -webkit-text-stroke-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   text-align: center;
-  background-image: url('./public/coin.gif');
+  background-image: url('./public/img/coin.gif');
   background-repeat: no-repeat;
   background-size: 32%;
   background-position: 2px 9px;
@@ -319,7 +319,7 @@ body {
 }
 .tablet {
   position: relative;
-  background-image: url('./public/tabletDeg-contur.png');
+  background-image: url('./public/img/tabletDeg-contur.png');
   bottom: -538px;
   left: 700px;
   width: 128px;
@@ -328,7 +328,7 @@ body {
 
 .floor {
   position: absolute;
-  background-image: url('./public/floor.jpeg');
+  background-image: url('./public/img/floor.jpeg');
   bottom: 0;
   margin: auto;
   width: 1120px;
@@ -474,7 +474,7 @@ input {
   top: 135px;
   height: 550px;
   width: 500px;
-  background-image: url('./public/tree1-BG1.png');
+  background-image: url('./public/img/tree1-BG1.png');
   background-size: 130%;
   background-position: -80px -45px;
   display: none;
@@ -486,7 +486,7 @@ input {
   top: 134px;
   height: 550px;
   width: 550px;
-  background-image: url('./public/tree2-BG1.png');
+  background-image: url('./public/img/tree2-BG1.png');
   background-size: 120%;
   background-position: -30px 0px;
   display: none;
@@ -498,7 +498,7 @@ input {
   top: 250px;
   height: 440px;
   width: 450px;
-  background-image: url('./public/tree3-BG1.png');
+  background-image: url('./public/img/tree3-BG1.png');
   background-size: 103%;
   background-position: 0 3px;
   display: none;
@@ -510,7 +510,7 @@ input {
   top: 250px;
   height: 440px;
   width: 450px;
-  background-image: url('./public/tree4-BG1.png');
+  background-image: url('./public/img/tree4-BG1.png');
   background-size: 103%;
   background-position: 0 3px;
   display: none;
@@ -528,7 +528,7 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: -6px 0px;
 }
@@ -539,7 +539,7 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: -200px 0px;
 }
@@ -550,7 +550,7 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: -2px -120px;
 }
@@ -561,7 +561,7 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: -200px -120px;
 }
@@ -572,7 +572,7 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: 0 -240px;
 }
@@ -583,14 +583,14 @@ input {
   left: -200px;
   height: 110px;
   width: 190px;
-  background-image: url('./public/clouds-pack.png');
+  background-image: url('./public/img/clouds-pack.png');
   background-size: 212%;
   background-position: -200px -240px;
 }
 
 .mountain {
   position: absolute;
-  background-image: url('./public/BG3-mountain.png');
+  background-image: url('./public/img/BG3-mountain.png');
   bottom: 31px;
   margin: auto;
   width: 1200px;
