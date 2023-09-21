@@ -120,7 +120,7 @@ function pauseCb() {
 function coffeButtonCb() {
   if (ispausing) {
     if (collision.coffeeScore > 0) {
-      console.log('started');
+      stopLoop();
       coffeeButtonDOM.style.display = 'none';
       coffeeButtonDOM.textContent = 'resume';
       coins.resetCoffeeScoreChange();
