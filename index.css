@@ -412,11 +412,99 @@ input {
   display: block;
 }
 
+#container-record-table {
+  position: absolute;
+  top: 36%;
+  bottom: 22%;
+  left: 50%;
+  translate: -50% 0;
+  width: 70%;
+  border: solid 2px rgb(255, 255, 255);
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#record-table {
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#record-table-label {
+  position: absolute;
+  top: -36px;
+  right: 50%;
+  translate: 50% 0;
+  font-size: 24px;
+}
+
+#user-name {
+  pointer-events: all;
+  position: absolute;
+  width: 50%;
+  height: 60px;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 20px;
+  font-size: 26px;
+  color: rgb(51, 175, 228);
+  text-align: center;
+  z-index: 11;
+}
+
+#record-table-Allname {
+  list-style-type: decimal;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  translate: -50% 0;
+}
+#record-table-Allscore {
+  list-style-type: none;
+  position: absolute;
+  top: 10%;
+  right: 25%;
+  translate: 50% 0%;
+}
+
+#record-table-split {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  height: 90%;
+  width: 4px;
+  background-color: white;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+.record-table-lable-name,
+.record-table-lable-score {
+  position: absolute;
+  text-decoration: underline;
+  font-size: 18px;
+  opacity: 0.6;
+}
+.record-table-lable-name {
+  left: 25%;
+  translate: -50% 0;
+}
+.record-table-lable-score {
+  right: 25%;
+  translate: 50% 0;
+}
+
 .restart {
   position: absolute;
-  top: 65%;
+  bottom: 8%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   padding: 10px 30px;
   border: 4px solid rgb(180, 180, 180);
   border-radius: 25px;
@@ -615,4 +703,22 @@ input {
   100% {
     opacity: 1;
   }
+}
+
+/* @media screen and (max-width: 400px) {
+  .game-box {
+    scale: 0.6;
+    translate: -20% -20%;
+  }
+} */
+
+/* Для WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 4px; /* Ширина скроллбара */
+}
+
+/* Для WebKit (Chrome, Safari, Opera) */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4); /* Цвет ползунка */
+  border-radius: 10px;
 }

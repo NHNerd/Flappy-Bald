@@ -1,5 +1,6 @@
 import { musicCheckBoxDOM, soundCheckBoxDOM } from './DOM.js';
 
+// Ту нужны полные пути
 let backSound = new Audio('./public/sound/back.mp3');
 let gameOverSound = new Audio('./public/sound/game-over.wav');
 let jumpSound = new Audio('./public/sound/pryjok-2.mp3');

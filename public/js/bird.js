@@ -1,5 +1,3 @@
-import sound from './sound.js';
-
 import { birdDOM } from './DOM.js';
 
 let jumpListener = false;
