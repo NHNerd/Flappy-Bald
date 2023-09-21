@@ -9,6 +9,9 @@ import coffee from './coffee.js';
 import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
+import { indexDB } from './data/indexDB.js';
+import { updateUser } from './data/userName.js';
+import { renerRecordTable } from './data/renderRecordTable.js';
 
 import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
 
@@ -20,6 +23,8 @@ let performanceStart;
 let gameStarted = false;
 let isDrinking = false;
 let isCollisionPipe = true;
+
+indexDB();
 
 restartDOM.textContent = 'start';
 // coffee.clickListner();
@@ -54,7 +59,6 @@ function loop(timestamp) {
   coffee.coffeeDisplay();
   coins.coinsCounter();
   speach.displayNone();
-
   fpsHandler.updateFps(timestamp, performanceNow, 35); //? secont - frequency refresh
 
   animationId = requestAnimationFrame(loop);
@@ -73,11 +77,12 @@ function startloop() {
   }
 }
 // Stop loop
-
 function stopLoop() {
   if (ispausing) {
     ispausing = false;
     cancelAnimationFrame(animationId);
+    updateUser(pipeHandler.score);
+    renerRecordTable();
   }
 }
 let x = true;
@@ -126,6 +131,7 @@ function coffeButtonCb() {
   } else {
     if (isDrinking) {
       startloop();
+
       coffeeButtonDOM.textContent = 'drink';
       coffee.resetState();
       isDrinking = false;
@@ -178,7 +184,8 @@ if (window.matchMedia('(pointer: coarse)').matches) {
       if (
         !event.target.classList.contains('pause') &&
         !event.target.classList.contains('restart') &&
-        !event.target.classList.contains('coffee-button')
+        !event.target.classList.contains('coffee-button') &&
+        !event.target.classList.contains('user-name')
       ) {
         event.preventDefault(); //? off click on a button in focus
         spaceCb(event);
@@ -233,12 +240,16 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 } else {
   document.addEventListener('mousedown', function (event) {
     if (!event.target.classList.contains('pause') && !event.target.classList.contains('coffee-button')) {
-      event.preventDefault(); //? off click on a button in focus
-      spaceCb(event);
+      if (gameStarted) {
+        event.preventDefault(); //? off click on a button in focus
+        spaceCb(event);
+      }
     }
   });
 
   //PC
+  if (false) {
+  }
   document.addEventListener(
     'keydown',
     throttle((event) => {
@@ -246,13 +257,9 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         reset();
         firstAnimationCb();
       }
-      if (event.key === ' ' || event.key === 'Spacebar') {
+      if ((event.key === ' ' || event.key === 'Spacebar') && gameStarted) {
         spaceCb(event);
-        if (!gameStarted) {
-          reset();
-          firstAnimationCb();
-        }
-      } else if (event.key === 'x' || event.key === 'X' || event.code === 'KeyX') {
+      } else if ((event.key === 'x' || event.key === 'X' || event.code === 'KeyX') && gameStarted) {
         xCb(event);
       } else if (event.key === 'Escape' && gameStarted && isDrinking === false) {
         pauseCb();
