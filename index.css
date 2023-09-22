@@ -401,6 +401,34 @@ input {
   z-index: 2;
 }
 
+#zero-score-alert {
+  padding: 26px;
+  padding-top: 50px;
+  position: absolute;
+  width: 46%;
+  left: 50%;
+  transform: translate(-50%, -130px);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 0 0 10px 10px;
+  color: white;
+  font-size: 16px;
+  z-index: 211;
+}
+@keyframes ZeroscoreAlertAlert {
+  0% {
+    translate: 0;
+  }
+  15% {
+    translate: 0 120px;
+  }
+  85% {
+    translate: 0 120px;
+  }
+  100% {
+    translate: 0;
+  }
+}
+
 #menu {
   position: absolute;
   left: 0;

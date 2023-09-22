@@ -1,3 +1,6 @@
+import { zeroscoreAlertDOM } from '../DOM.js';
+import { scoreDOM } from '../DOM.js';
+
 let db;
 let isIndexDBOpened = false;
 
@@ -28,6 +31,15 @@ export function indexDB() {
 }
 
 export function indexDBAdd(name, score) {
+  if (score === 0) {
+    zeroscoreAlertDOM.style.animation = 'ZeroscoreAlertAlert 3.2s ease-out';
+    scoreDOM.style.zIndex = 1;
+    setTimeout(() => {
+      scoreDOM.style.zIndex = 2;
+    }, 4500);
+    return;
+  }
+
   const user = {
     name: name,
     score: score,
@@ -56,6 +68,7 @@ export function getAllUsers(callback) {
 
     request.onsuccess = (e) => {
       const users = e.target.result;
+      users.sort((a, b) => b.score - a.score);
       callback(users);
     };
 
