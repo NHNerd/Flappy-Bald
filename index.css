@@ -401,7 +401,7 @@ input {
   z-index: 2;
 }
 
-.menu {
+#menu {
   position: absolute;
   left: 0;
   right: 0;

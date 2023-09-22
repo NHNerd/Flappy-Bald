@@ -69,23 +69,23 @@
         <section class="pause-menu">
           <label class="container"
             >music
-            <input type="checkbox" checked="checked" class="music-check-box" />
+            <input type="checkbox" checked="checked" id="music-check-box" />
             <span class="checkmark"></span>
           </label>
           <label class="container"
             >sound
-            <input type="checkbox" checked="checked" class="sound-check-box" />
+            <input type="checkbox" checked="checked" id="sound-check-box" />
             <span class="checkmark"></span>
           </label>
         </section>
-        <form class="menu">
+        <form id="menu">
           <section id="container-record-table">
-            <label id="record-table-label" for="Record table">Record table </label>
+            <div id="record-table-label">Record table</div>
             <div id="record-table-split"></div>
             <div id="record-table">
-              <label class="record-table-lable-name" for="Name">Name</label>
+              <div class="record-table-lable-name">Name</div>
               <section id="record-table-Allname"></section>
-              <label class="record-table-lable-score" for="Score">Score</label>
+              <div class="record-table-lable-score">Score</div>
               <section id="record-table-Allscore"></section>
             </div>
           </section>
@@ -97,9 +97,11 @@
             required
             maxlength="14"
             placeholder="Enter nick-name"
+            autocomplete="username"
           />
           <button type="button" class="restart">restart</button>
         </form>
+
         <div class="score"></div>
         <div class="bird"></div>
         <div class="speach">

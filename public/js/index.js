@@ -10,8 +10,6 @@ import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
 import { indexDB } from './data/indexDB.js';
-import { updateUser } from './data/userName.js';
-import { renerRecordTable } from './data/renderRecordTable.js';
 
 import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
 
@@ -81,8 +79,6 @@ function stopLoop() {
   if (ispausing) {
     ispausing = false;
     cancelAnimationFrame(animationId);
-    updateUser(pipeHandler.score);
-    renerRecordTable();
   }
 }
 let x = true;
@@ -152,7 +148,8 @@ function reset() {
   speach.resetState();
   snowFall.resetState();
   startloop();
-  sound.playBackMusic();
+  sound.playGameMusic();
+  sound.pauseMenuMusic();
 }
 
 function throttle(func, delay) {
@@ -253,7 +250,11 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   document.addEventListener(
     'keydown',
     throttle((event) => {
-      if ((event.key === 'NumpadEnter' || event.key === 'Enter') && !gameStarted) {
+      if (
+        (event.key === 'NumpadEnter' || event.key === 'Enter') &&
+        !gameStarted &&
+        restartDOM.style.pointerEvents === 'all'
+      ) {
         reset();
         firstAnimationCb();
       }
