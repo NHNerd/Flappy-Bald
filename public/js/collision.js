@@ -12,6 +12,9 @@ import {
 import coffee from './coffee.js';
 import speach from './speach.js';
 import sound from './sound.js';
+import { updateUser } from './data/userName.js';
+import { renerRecordTable } from './data/renderRecordTable.js';
+import pipeHandler from './pipes.js';
 
 const collision = {
   value: false,
@@ -75,9 +78,15 @@ const collision = {
     if (this.value) {
       pauseDOM.style.display = 'none';
       speach.displayBlock();
-      sound.pauseBackMusic();
+      sound.pauseGameMusic();
+      sound.playMenuMusic();
       sound.playCollisionSound();
       sound.isEndCollisionSound();
+
+      //* indexDB
+      updateUser(pipeHandler.score);
+      renerRecordTable();
+
       setTimeout(() => {
         menuDOM.style.display = 'block';
       }, 1200);

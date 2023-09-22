@@ -1,7 +1,8 @@
 import { musicCheckBoxDOM, soundCheckBoxDOM } from './DOM.js';
 
 // Ту нужны полные пути
-let backSound = new Audio('./public/sound/back.mp3');
+let menu = new Audio('./public/sound/menu.mp3');
+let game = new Audio('./public/sound/game.mp3');
 let gameOverSound = new Audio('./public/sound/game-over.wav');
 let jumpSound = new Audio('./public/sound/pryjok-2.mp3');
 let superJumpSound = new Audio('./public/sound/super-jump.mp3');
@@ -21,15 +22,23 @@ function setAllSoundVolumes(volume) {
 }
 
 export default {
-  playBackMusic() {
-    backSound.currentTime = 0;
-    backSound.play();
+  playGameMusic() {
+    game.currentTime = 0;
+    game.play();
   },
 
-  pauseBackMusic() {
-    backSound.pause();
+  pauseGameMusic() {
+    game.pause();
   },
-
+  playMenuMusic() {
+    setTimeout(() => {
+      menu.currentTime = 0;
+      menu.play();
+    }, 1000);
+  },
+  pauseMenuMusic() {
+    menu.pause();
+  },
   playJumpSound() {
     jumpSound.currentTime = 0; // Сбросить текущую позицию воспроизведения
     jumpSound.play();
@@ -61,9 +70,11 @@ export default {
     musicCheckBoxDOM.addEventListener('change', () => {
       isMusic = !isMusic;
       if (isMusic) {
-        backSound.volume = 0.14;
+        game.volume = 0.14;
+        menu.volume = 0.07;
       } else {
-        backSound.volume = 0;
+        game.volume = 0;
+        menu.volume = 0;
       }
     });
   },
@@ -82,14 +93,16 @@ export default {
 
 setAllSoundVolumes(1);
 
-backSound.loop = true;
-backSound.volume = 0.14;
+game.loop = true;
+game.volume = 0.14;
+menu.loop = true;
+menu.volume = 0.07;
 
 // screen visible stop/start audio
 document.addEventListener('visibilitychange', function () {
   if (document.visibilityState === 'hidden') {
-    backSound.pause();
+    game.pause();
   } else {
-    backSound.play();
+    game.play();
   }
 });
