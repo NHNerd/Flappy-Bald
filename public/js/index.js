@@ -10,6 +10,7 @@ import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
 import { indexDB } from './data/indexDB.js';
+import { fetchGetUsers } from './fetch/fetch.js';
 
 import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
 
@@ -23,6 +24,7 @@ let isDrinking = false;
 let isCollisionPipe = true;
 
 indexDB();
+fetchGetUsers();
 
 restartDOM.textContent = 'start';
 // coffee.clickListner();
