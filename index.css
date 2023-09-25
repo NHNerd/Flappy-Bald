@@ -471,7 +471,7 @@ input {
 }
 
 #record-table {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   position: absolute;
   top: 0;
   bottom: 0;
