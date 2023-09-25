@@ -3,6 +3,7 @@ import { scoreDOM } from '../DOM.js';
 
 let db;
 let isIndexDBOpened = false;
+let topUsersIDB = [];
 
 export function indexDB() {
   if (!window.indexedDB) {
@@ -35,7 +36,9 @@ export function indexDBAdd(name, score) {
     zeroscoreAlertDOM.style.animation = 'ZeroscoreAlertAlert 3.2s ease-out';
     scoreDOM.style.zIndex = 1;
     setTimeout(() => {
+      // clear
       scoreDOM.style.zIndex = 2;
+      zeroscoreAlertDOM.style.animation = '';
     }, 4500);
     return;
   }
@@ -67,9 +70,10 @@ export function getAllUsers(callback) {
     const request = objectStore.getAll();
 
     request.onsuccess = (e) => {
-      const users = e.target.result;
-      users.sort((a, b) => b.score - a.score);
-      callback(users);
+      topUsersIDB = e.target.result;
+      topUsersIDB.sort((a, b) => b.score - a.score);
+
+      callback(topUsersIDB);
     };
 
     request.onerror = (error) => {
@@ -82,3 +86,5 @@ export function getAllUsers(callback) {
     }
   }, 300);
 }
+
+export { topUsersIDB };

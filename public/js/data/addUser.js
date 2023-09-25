@@ -1,5 +1,6 @@
-import { indexDBAdd } from './indexDB.js';
+// import { indexDBAdd } from './indexDB.js';
 import { userNameDOM, restartDOM } from '../DOM.js';
+import { fetchAddUser } from './fetch.js';
 
 // Cancel button start if input field is empty
 restartDOM.style.pointerEvents = 'none';
@@ -10,7 +11,8 @@ function chechNameInpur() {
     : (restartDOM.style.pointerEvents = 'all');
 }
 
-export function updateUser(score) {
+export async function updateUser(score) {
   const name = userNameDOM.value;
-  indexDBAdd(name, score);
+  const newUser = { name, score };
+  return fetchAddUser(newUser);
 }

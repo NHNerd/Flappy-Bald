@@ -401,6 +401,45 @@ input {
   z-index: 2;
 }
 
+.container-mongoDBFalse {
+  padding: 16px;
+  padding-right: 68px;
+  position: absolute;
+  width: 60%;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 3;
+  /* display: flex;
+  align-items: center; */
+}
+.container-mongoDBFalse.true {
+  translate: 0 -160px;
+}
+
+#mongoDBFalse {
+  color: white;
+  text-align: center;
+  padding-right: 16px;
+}
+#refreshConnectMDBB {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  height: 53px;
+  width: 53px;
+  background-image: url('./public/img/icons8-refresh.svg');
+}
+#refreshConnectMDBB:hover {
+  scale: 1.05;
+}
+#refreshConnectMDBB:active {
+  scale: 1.05;
+  background-color: white;
+  /* background-image: url('./public/img/icons8-refresh.gif'); */
+}
+
 #zero-score-alert {
   padding: 26px;
   padding-top: 50px;
