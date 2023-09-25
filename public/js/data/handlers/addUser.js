@@ -1,6 +1,6 @@
 // import { indexDBAdd } from './indexDB.js';
-import { userNameDOM, restartDOM } from '../DOM.js';
-import { fetchAddUser } from './fetch.js';
+import { userNameDOM, restartDOM } from '../../DOM.js';
+import { fetchAddUser } from '../fetch.js';
 
 // Cancel button start if input field is empty
 restartDOM.style.pointerEvents = 'none';

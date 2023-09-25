@@ -1,27 +1,34 @@
+import { disconectHandelr } from './handlers/disconnect.js';
+
+// MDB - mongoDB
 let topUsersMDB = null;
+disconectHandelr(true);
 
 function fetchGetUsers() {
-  return fetch('http://localhost:3000/', {
+  return fetch('http://localhost:3000/users', {
     method: 'GET', // HTTP-метод GET для получения данных
     headers: {
       'Content-Type': 'application/json', // set content type like JSON
     },
   })
     .then((response) => {
+      if (!response.ok) {
+        disconectHandelr(true);
+        throw new Error('Network response was not ok');
+      }
+      disconectHandelr(false);
       return response.json(); // parsing to JSON
     })
     .then((users) => {
-      // Обрабатываем полученные данные
       topUsersMDB = users;
-      console.log('FETCH GET');
     })
     .catch((error) => {
-      console.error('P I Z D E Z: ' + error);
+      console.error('Error: S E R V E R: GET all users: ' + error);
     });
 }
 
 function fetchAddUser(newUser) {
-  fetch('http://localhost:3000/', {
+  return fetch('http://localhost:3000/newUser', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,22 +39,30 @@ function fetchAddUser(newUser) {
       return response.json();
     })
     .then((user) => {
-      console.log('Client MongoDB: New user is sent', user);
+      console.log(`S E R V E R: POST new user: ${user.name}`);
     })
     .catch((error) => {
-      console.error('Client MongoDB: ' + error);
+      console.error('Error: S E R V E R: POST new user: ' + error);
     });
 }
 
-export { topUsersMDB, fetchGetUsers, fetchAddUser };
-// const name = 'S U K A';
-// const score = 200;
+function fetchRemoveUser(userId) {
+  return fetch(`http://localhost:3000/${userId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data.message);
+    })
+    .catch((error) => {
+      console.error('Error: S E R V E R: DELETE: ' + error);
+    });
+}
 
-// const newUser = { name, score };
-
-// async function MongoAddAndGet() {
-//   await fetchAddUser(newUser);
-//   fetchGetUsers();
-// }
-
-// MongoAddAndGet();
+export { topUsersMDB, fetchGetUsers, fetchAddUser, fetchRemoveUser };

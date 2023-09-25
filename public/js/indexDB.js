@@ -1,5 +1,5 @@
-import { zeroscoreAlertDOM } from '../DOM.js';
-import { scoreDOM } from '../DOM.js';
+import { zeroscoreAlertDOM } from './DOM.js';
+import { scoreDOM } from './DOM.js';
 
 let db;
 let isIndexDBOpened = false;

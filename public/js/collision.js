@@ -12,10 +12,9 @@ import {
 import coffee from './coffee.js';
 import speach from './speach.js';
 import sound from './sound.js';
-import { updateUser } from './data/addUser.js';
-import { fetchGetUsers } from './data/fetch.js';
 import { renerRecordTable } from './renderRecordTable.js';
 import pipeHandler from './pipes.js';
+import { zeroScoreAlert } from './zeroScore.js';
 
 const collision = {
   value: false,
@@ -84,12 +83,9 @@ const collision = {
       sound.playCollisionSound();
       sound.isEndCollisionSound();
 
-      //* mongoDB
-      async function refreshRecordTable() {
-        await updateUser(pipeHandler.score);
-        renerRecordTable();
-      }
-      refreshRecordTable();
+      zeroScoreAlert(pipeHandler.score);
+      //* from server
+      renerRecordTable(pipeHandler.score);
 
       setTimeout(() => {
         menuDOM.style.display = 'block';
