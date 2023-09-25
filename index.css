@@ -401,6 +401,22 @@ input {
   z-index: 2;
 }
 
+.container-mongoDBFalse {
+  padding: 16px;
+
+  position: absolute;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  transition: 0.25s;
+  z-index: 3;
+  opacity: 0;
+}
+
 #zero-score-alert {
   padding: 26px;
   padding-top: 50px;
@@ -488,14 +504,14 @@ input {
 #record-table-Allname {
   list-style-type: decimal;
   position: absolute;
-  top: 10%;
+  top: 14%;
   left: 25%;
   translate: -50% 0;
 }
 #record-table-Allscore {
   list-style-type: none;
   position: absolute;
-  top: 10%;
+  top: 14%;
   right: 25%;
   translate: 50% 0%;
 }
@@ -516,7 +532,7 @@ input {
 .record-table-lable-score {
   position: absolute;
   text-decoration: underline;
-  font-size: 18px;
+  font-size: 24px;
   opacity: 0.6;
 }
 .record-table-lable-name {
@@ -540,7 +556,6 @@ input {
   background-color: rgb(18, 18, 18);
   color: rgb(237, 237, 237);
   transition: 0.4s;
-  animation: blinking-animation 0.5s infinite alternate;
 }
 
 .restart:hover {

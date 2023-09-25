@@ -12,9 +12,9 @@ import {
 import coffee from './coffee.js';
 import speach from './speach.js';
 import sound from './sound.js';
-import { updateUser } from './data/userName.js';
-import { renerRecordTable } from './data/renderRecordTable.js';
+import { renerRecordTable } from './renderRecordTable.js';
 import pipeHandler from './pipes.js';
+import { zeroScoreAlert } from './zeroScore.js';
 
 const collision = {
   value: false,
@@ -83,9 +83,9 @@ const collision = {
       sound.playCollisionSound();
       sound.isEndCollisionSound();
 
-      //* indexDB
-      updateUser(pipeHandler.score);
-      renerRecordTable();
+      zeroScoreAlert(pipeHandler.score);
+      //* from server
+      renerRecordTable(pipeHandler.score);
 
       setTimeout(() => {
         menuDOM.style.display = 'block';

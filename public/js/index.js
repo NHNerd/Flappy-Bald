@@ -9,7 +9,6 @@ import coffee from './coffee.js';
 import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
-import { indexDB } from './data/indexDB.js';
 
 import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
 
@@ -22,10 +21,8 @@ let gameStarted = false;
 let isDrinking = false;
 let isCollisionPipe = true;
 
-indexDB();
-
 restartDOM.textContent = 'start';
-// coffee.clickListner();
+
 coffee.animationListner();
 sound.isMusicFunc();
 sound.isSoundFunc();
@@ -193,6 +190,18 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   );
 
   //Mobile
+
+  document.addEventListener('keydown', function (event) {
+    if (
+      (event.key === 'Enter' || event.key === 'Go' || event.key === 'Done') &&
+      !gameStarted &&
+      restartDOM.style.pointerEvents === 'all'
+    ) {
+      reset();
+      firstAnimationCb();
+    }
+  });
+
   document.addEventListener('touchmove', (event) => {
     swipeCurrentYPos = event.changedTouches[0].pageY;
     if (swipeStartYPos > swipeCurrentYPos + 100 && !xCbCalled) {

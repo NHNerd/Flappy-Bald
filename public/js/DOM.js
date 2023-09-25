@@ -13,6 +13,7 @@ export const pipes1DOM = document.querySelector('.pipes');
 export const pipes2DOM = document.querySelector('.pipes2');
 export const menuDOM = document.getElementById('menu');
 export const zeroscoreAlertDOM = document.getElementById('zero-score-alert');
+export const containerMongoDBFalseDOM = document.querySelector('.container-mongoDBFalse');
 export const scoreDOM = document.querySelector('.score');
 export const pauseDOM = document.querySelector('.pause');
 export const pauseMenuDOM = document.querySelector('.pause-menu');
