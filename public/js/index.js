@@ -22,7 +22,7 @@ let isDrinking = false;
 let isCollisionPipe = true;
 
 restartDOM.textContent = 'start';
-// coffee.clickListner();
+
 coffee.animationListner();
 sound.isMusicFunc();
 sound.isSoundFunc();
@@ -190,6 +190,18 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   );
 
   //Mobile
+
+  document.addEventListener('keydown', function (event) {
+    if (
+      (event.key === 'Enter' || event.key === 'Go' || event.key === 'Done') &&
+      !gameStarted &&
+      restartDOM.style.pointerEvents === 'all'
+    ) {
+      reset();
+      firstAnimationCb();
+    }
+  });
+
   document.addEventListener('touchmove', (event) => {
     swipeCurrentYPos = event.changedTouches[0].pageY;
     if (swipeStartYPos > swipeCurrentYPos + 100 && !xCbCalled) {

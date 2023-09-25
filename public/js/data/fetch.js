@@ -1,11 +1,12 @@
 import { disconectHandelr } from './handlers/disconnect.js';
 
 // MDB - mongoDB
+const apiUrl = 'https://flappy-bald-backend.up.railway.app';
 let topUsersMDB = null;
 disconectHandelr(true);
 
 function fetchGetUsers() {
-  return fetch('http://localhost:3000/users', {
+  return fetch(apiUrl + '/users', {
     method: 'GET', // HTTP-метод GET для получения данных
     headers: {
       'Content-Type': 'application/json', // set content type like JSON
@@ -28,7 +29,7 @@ function fetchGetUsers() {
 }
 
 function fetchAddUser(newUser) {
-  return fetch('http://localhost:3000/newUser', {
+  return fetch(apiUrl + '/newUser', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ function fetchAddUser(newUser) {
 }
 
 function fetchRemoveUser(userId) {
-  return fetch(`http://localhost:3000/${userId}`, {
+  return fetch(apiUrl + '/' + userId, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
