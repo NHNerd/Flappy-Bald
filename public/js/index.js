@@ -9,8 +9,17 @@ import coffee from './coffee.js';
 import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
+import donations from './donations.js';
 
-import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
+import {
+  pauseDOM,
+  restartDOM,
+  coffeeButtonDOM,
+  pauseMenuDOM,
+  birdDOM,
+  donationsDOM,
+  exitDonationsPageDOM,
+} from './DOM.js';
 
 let animationId = undefined;
 let ispausing = false;
@@ -26,6 +35,9 @@ restartDOM.textContent = 'start';
 coffee.animationListner();
 sound.isMusicFunc();
 sound.isSoundFunc();
+
+// donations.closeDonations();
+// donations.openDonations();
 
 // handler loop
 function loop(timestamp) {
@@ -253,6 +265,13 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     }
   });
 
+  donationsDOM.addEventListener('touchend', () => {
+    donations.openDonations();
+  });
+  exitDonationsPageDOM.addEventListener('touchend', () => {
+    donations.closeDonations();
+  });
+
   //PC
   if (false) {
   }
@@ -306,6 +325,13 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   restartDOM.addEventListener('click', () => {
     reset();
     firstAnimationCb();
+  });
+
+  donationsDOM.addEventListener('click', () => {
+    donations.openDonations();
+  });
+  exitDonationsPageDOM.addEventListener('click', () => {
+    donations.closeDonations();
   });
 }
 
