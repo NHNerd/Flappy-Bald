@@ -578,6 +578,11 @@ input {
   cursor: pointer;
   z-index: 5;
 }
+@media screen and (max-width: 760px) {
+  #donations {
+    right: 16%;
+  }
+}
 
 #donations-page {
   position: absolute;
@@ -591,6 +596,8 @@ input {
 
 .close-donations-page {
   transform: translateY(100%);
+  opacity: 0;
+  user-select: none;
 }
 
 #exit-donations-page {
@@ -600,7 +607,14 @@ input {
   color: rgb(234, 171, 235);
   font-size: 36px;
   cursor: pointer;
+  z-index: 999;
 }
+@media screen and (max-width: 760px) {
+  #exit-donations-page {
+    right: 20%;
+  }
+}
+
 #exit-donations-page:hover {
   font-size: 42px;
   transform: translate(5%, -10%);
@@ -638,12 +652,150 @@ input {
   cursor: pointer;
   animation: blinking-animation 1s infinite alternate;
 }
+
 #donations-telegram:hover {
   border: 4px solid rgb(40, 40, 40);
   color: rgb(18, 18, 18);
   transform: scale(110%) translate(-45%, -4%);
   background-color: rgb(237, 237, 237);
   transition: 0.2s;
+}
+
+#donations-telegram-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+  background-color: rgb(18, 18, 18);
+}
+
+.donations-telegram-page-close {
+  transform: translateY(100%);
+  opacity: 0;
+  user-select: none;
+}
+
+#pay-ton-qr-text {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: rgb(234, 171, 235);
+}
+
+#pay-ton-qr {
+  position: absolute;
+  top: 10%;
+  bottom: 0;
+  left: 28%;
+  right: 28%;
+  background-image: url('./public/img/tg-ton-qr.png');
+  background-repeat: no-repeat;
+  background-position: 50% 10%;
+  background-size: 96%;
+}
+
+#text-tg-walet1 {
+  position: absolute;
+  top: 66%;
+  bottom: 0;
+  left: 22%;
+  right: 22%;
+  color: rgb(234, 171, 235);
+  text-align: center;
+}
+
+#text-tg-walet2 {
+  position: absolute;
+  top: 84%;
+  bottom: 0;
+  left: 6%;
+  right: 18%;
+  color: rgb(234, 171, 235);
+  text-align: center;
+}
+#pay-ton-wallet {
+  position: absolute;
+  bottom: -1%;
+  right: 5%;
+  height: 130px;
+  width: 130px;
+  background-image: url('./public/img/tg-wallet.svg');
+  background-repeat: no-repeat;
+  background-size: 140%;
+  animation: blinking-animation 1.5s infinite alternate;
+}
+#pay-ton-wallet:hover {
+  transform: scale(110%) translate(3%, 3%);
+}
+#donations-telegram-page-or {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 22px;
+  color: rgb(234, 171, 235);
+}
+#copy-text {
+  position: absolute;
+  bottom: 21.2%;
+  left: 20%;
+  right: 20%;
+  height: 50px;
+  white-space: normal;
+}
+#tg-wallet0-copy {
+  position: absolute;
+  width: 86%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+#input-visual {
+  position: absolute;
+  width: 83%;
+  height: 100%;
+  text-align: center;
+  color: rgb(237, 237, 237);
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  user-select: text;
+}
+#button-copy-tg {
+  position: absolute;
+  top: 16%;
+  right: -10px;
+  width: 12%;
+  height: 86%;
+  background-color: transparent; /* Убирает заливку */
+  border: none; /* Убирает рамку */
+  padding: 0; /* Убирает отступы */
+  cursor: pointer; /* Делает курсор как на ссылке */
+  background-image: url('./public/img/copy-link-icon.svg');
+  fill: #5046e5;
+  background-repeat: no-repeat;
+  background-size: 90%;
+}
+#button-copy-tg:hover {
+  transform: scale(110%) translate(3%, 3%);
+}
+#button-copy-tg-copied {
+  position: absolute;
+  top: -90%;
+  left: -20%;
+  height: 24px;
+  width: 80px;
+  background-color: #ededed;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.button-copy-tg-copied-off {
+  transform: translate(-20%, 100%) scale(1%);
+  opacity: 0;
+  transition: 0.3s;
 }
 
 .air1 {

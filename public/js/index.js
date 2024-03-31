@@ -19,6 +19,8 @@ import {
   birdDOM,
   donationsDOM,
   exitDonationsPageDOM,
+  buttonCopyTgDOM,
+  donationsTelegramDOM,
 } from './DOM.js';
 
 let animationId = undefined;
@@ -203,6 +205,21 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 
   //Mobile
 
+  donationsDOM.addEventListener('touchend', () => {
+    donations.openDonations();
+  });
+  exitDonationsPageDOM.addEventListener('touchend', () => {
+    donations.closeDonations();
+  });
+
+  donationsTelegramDOM.addEventListener('touchend', () => {
+    donations.openDonationsTelegram();
+  });
+
+  buttonCopyTgDOM.addEventListener('touchend', () => {
+    donations.copyTgTonAdress();
+  });
+
   document.addEventListener('keydown', function (event) {
     if (
       (event.key === 'Enter' || event.key === 'Go' || event.key === 'Done') &&
@@ -265,13 +282,6 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     }
   });
 
-  donationsDOM.addEventListener('touchend', () => {
-    donations.openDonations();
-  });
-  exitDonationsPageDOM.addEventListener('touchend', () => {
-    donations.closeDonations();
-  });
-
   //PC
   if (false) {
   }
@@ -292,6 +302,10 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         xCb(event);
       } else if (event.key === 'Escape' && gameStarted && isDrinking === false) {
         pauseCb();
+      }
+
+      if (event.key === 'Escape') {
+        donations.closeDonations();
       }
 
       if (
@@ -332,6 +346,14 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   });
   exitDonationsPageDOM.addEventListener('click', () => {
     donations.closeDonations();
+  });
+
+  donationsTelegramDOM.addEventListener('click', () => {
+    donations.openDonationsTelegram();
+  });
+
+  buttonCopyTgDOM.addEventListener('click', () => {
+    donations.copyTgTonAdress();
   });
 }
 
