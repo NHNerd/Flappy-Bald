@@ -9,8 +9,19 @@ import coffee from './coffee.js';
 import speach from './speach.js';
 import coins from './coins.js';
 import sound from './sound.js';
+import donations from './donations.js';
 
-import { pauseDOM, restartDOM, coffeeButtonDOM, pauseMenuDOM, birdDOM } from './DOM.js';
+import {
+  pauseDOM,
+  restartDOM,
+  coffeeButtonDOM,
+  pauseMenuDOM,
+  birdDOM,
+  donationsDOM,
+  exitDonationsPageDOM,
+  buttonCopyTgDOM,
+  donationsTelegramDOM,
+} from './DOM.js';
 
 let animationId = undefined;
 let ispausing = false;
@@ -26,6 +37,9 @@ restartDOM.textContent = 'start';
 coffee.animationListner();
 sound.isMusicFunc();
 sound.isSoundFunc();
+
+// donations.closeDonations();
+// donations.openDonations();
 
 // handler loop
 function loop(timestamp) {
@@ -191,6 +205,21 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 
   //Mobile
 
+  donationsDOM.addEventListener('touchend', () => {
+    donations.openDonations();
+  });
+  exitDonationsPageDOM.addEventListener('touchend', () => {
+    donations.closeDonations();
+  });
+
+  donationsTelegramDOM.addEventListener('touchend', () => {
+    donations.openDonationsTelegram();
+  });
+
+  buttonCopyTgDOM.addEventListener('touchend', () => {
+    donations.copyTgTonAdress();
+  });
+
   document.addEventListener('keydown', function (event) {
     if (
       (event.key === 'Enter' || event.key === 'Go' || event.key === 'Done') &&
@@ -275,6 +304,10 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         pauseCb();
       }
 
+      if (event.key === 'Escape') {
+        donations.closeDonations();
+      }
+
       if (
         coffeeButtonDOM.style.display === 'block' &&
         (event.key === 'c' || event.key === 'C' || event.code === 'KeyC')
@@ -306,6 +339,21 @@ if (window.matchMedia('(pointer: coarse)').matches) {
   restartDOM.addEventListener('click', () => {
     reset();
     firstAnimationCb();
+  });
+
+  donationsDOM.addEventListener('click', () => {
+    donations.openDonations();
+  });
+  exitDonationsPageDOM.addEventListener('click', () => {
+    donations.closeDonations();
+  });
+
+  donationsTelegramDOM.addEventListener('click', () => {
+    donations.openDonationsTelegram();
+  });
+
+  buttonCopyTgDOM.addEventListener('click', () => {
+    donations.copyTgTonAdress();
   });
 }
 
